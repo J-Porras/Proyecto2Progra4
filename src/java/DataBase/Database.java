@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Database;
+package Data.Service.logic.DataBase;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.io.BufferedInputStream;
