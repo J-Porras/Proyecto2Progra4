@@ -24,6 +24,7 @@ public class usuarios {
 
     public usuarios() {
     }
+    
 
     
     public String getId() {
