@@ -1,16 +1,130 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
+
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Cinemamela.org</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' href='css/estilo.css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
+
     <body>
-        <div>TODO write content</div>
+        <header class="navbar">
+            <a href="">Cinemamela.org</a>
+            <button class="open-button" onclick="openForm()">Iniciar sesion</button>
+        </header>
+        <div class="form-popup" id="myForm">
+            <form action="" class="form-container">
+                <img class="" src="images/x.jpg" alt="Cerrar" onclick="closeForm()">
+                <h1>Login</h1>
+                <input type="text" placeholder="Usuario" name="-" required>
+                <input type="password" placeholder="Contraseña" name="-" required>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+        <div class="movies" id="movies">
+
+        </div>
+        <div class="movie-container">
+            <label>Elija una pelicula</label>
+            <select id="movie">
+                <option value="10">Avengers: Endgame ($10)</option>
+                <option value="12">Joker ($12)</option>
+                <option value="8">Toy Story 4 ($8)</option>
+                <option value="9">The Lion King ($9)</option>
+            </select>
+        </div>
+        <ul class="showcase">
+            <li>
+                <div class="seat"></div>
+                <small>Disponible</small>
+            </li>
+            <li>
+                <div class="seat selected"></div>
+                <small>Elegido</small>
+            </li>
+            <li>
+                <div class="seat occupied"></div>
+                <small>Ocupado</small>
+            </li>
+        </ul>
+
+        <div class="container">
+            <div class="screen"></div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat"></div>
+            </div>
+
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+        </div>
+
+        <p class="text">Se han elegido
+            <span id="count">0</span>
+            por el precio total de $<span id="total">0</span>
+        </p>
+        <script src='script/main.js'></script>
     </body>
+
 </html>
