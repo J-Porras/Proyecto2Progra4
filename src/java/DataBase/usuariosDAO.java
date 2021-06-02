@@ -5,10 +5,54 @@
  */
 package DataBase;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import usuarios.Logic.usuarios;
+
 /**
  *
  * @author pg300
  */
 public class usuariosDAO {
+    public usuarios from(ResultSet rs) {
+        try {
+            usuarios r = new usuarios();
+            r.setId(rs.getString("id"));
+            r.setNombre(rs.getString("nombre"));
+            r.setContrasenna(rs.getString("contrasenna"));
+            r.setRol(rs.getInt("rol"));
+            return r;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
     
+    
+    public usuarios readbyId(String id) throws Exception {
+        String sqlcommand = "select * from usuarios where id = ?";
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        stm.setString(1, id);
+        ResultSet rs = Database.instance().executeQuery(stm);
+        if (rs.next()) {
+            return from(rs);
+        } else {
+            throw new Exception("Usuario no Existe");
+        }
+    }
+    
+    public usuarios create(usuarios cl) throws SQLException, Exception {
+        String sqlcommand = "insert into Usuarios (id,nombre,contrasenna,rol)"
+                + "values(?,?,?,?)";
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        stm.setString(1, cl.getId());
+        stm.setString(2, cl.getNombre());
+        stm.setString(3, cl.getContrasenna());
+        stm.setInt(4, cl.getRol());
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("Usuario ya existe");
+        }
+        return cl;
+    }
 }
