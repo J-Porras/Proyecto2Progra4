@@ -10,6 +10,7 @@ import DataBase.proyeccionesDAO;
 import DataBase.salasDAO;
 import DataBase.tiquetescompradosDAO;
 import DataBase.usuariosDAO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import peliculas.Logic.peliculas;
@@ -123,7 +124,7 @@ public class Service {
         return result;
     }
     
-      public tiqueteComprado crearTiquetesComprados(tiqueteComprado s){
+    public tiqueteComprado crearTiquetesComprados(tiqueteComprado s){
         tiqueteComprado result = null;
         
         try {
@@ -134,4 +135,28 @@ public class Service {
         }
         return result;
     }
+      
+     public List<tiqueteComprado> asientosOcupadosPro(int proyeccion_id) {
+        try {
+            return tiquetescompradosDao.asientos_ocupados_porProyeccion(proyeccion_id);
+        } catch (Exception e) {
+            return null;
+        }
+       }
+         public List<tiqueteComprado> proyeccionCliente(String cliente) {
+        try {
+            return tiquetescompradosDao.proyeccion_cliente(cliente);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+         
+         
+    public List<proyeccion> proyeccionPelicula(int proyeccion_id) {
+        try {
+            return this.proyecciondao.proyeccion_porPelicula(proyeccion_id);
+        } catch (Exception e) {
+            return null;
+        }
+        }
 }
