@@ -6,12 +6,16 @@
 package Data.Service.logic;
 
 import DataBase.peliculasDAO;
+import DataBase.proyeccionesDAO;
 import DataBase.salasDAO;
+import DataBase.tiquetescompradosDAO;
 import DataBase.usuariosDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import peliculas.Logic.peliculas;
+import proyecciones.Logic.proyeccion;
 import salas.Logic.sala;
+import tiquetesComprados.Logic.tiqueteComprado;
 import usuarios.Logic.usuarios;
 
 /**
@@ -22,6 +26,9 @@ public class Service {
     private peliculasDAO peliculasDAO;
     private usuariosDAO usuariosDAO;
     private salasDAO salasDAO;
+    private proyeccionesDAO proyecciondao;
+    private tiquetescompradosDAO tiquetescompradosDao;
+    
     private static Service theInstance;
     
     
@@ -36,6 +43,8 @@ public class Service {
         this.peliculasDAO = new peliculasDAO();
         this.usuariosDAO = new usuariosDAO();
         this.salasDAO = new salasDAO();
+        this.proyecciondao = new proyeccionesDAO();
+        this.tiquetescompradosDao = new tiquetescompradosDAO();
     }
     
     
@@ -102,5 +111,27 @@ public class Service {
         return result;
     }
     
+    public proyeccion crearProyecion(proyeccion s){
+        proyeccion result = null;
+        
+        try {
+            result = proyecciondao.create(s);
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+            return result;
+        }
+        return result;
+    }
     
+      public tiqueteComprado crearTiquetesComprados(tiqueteComprado s){
+        tiqueteComprado result = null;
+        
+        try {
+            result = tiquetescompradosDao.create(s);
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+            return result;
+        }
+        return result;
+    }
 }
