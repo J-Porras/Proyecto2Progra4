@@ -28,7 +28,7 @@ public class salasDAO {
     
     public sala readbyId(String id) throws Exception {
         String sqlcommand = "select * from salas where id = ?";
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setString(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {

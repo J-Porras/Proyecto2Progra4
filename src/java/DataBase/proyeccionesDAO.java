@@ -36,7 +36,7 @@ public class proyeccionesDAO {
     
     public proyeccion  readbyId(int id) throws Exception {
         String sqlcommand = "select * from proyeccion where id = ?";
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {
@@ -49,7 +49,7 @@ public class proyeccionesDAO {
      public List<proyeccion>  proyeccion_porPelicula(int id) throws Exception {
         String sqlcommand = "select * from tiquetesComprados where pelicula_id = ?";
           List<proyeccion> proyeccion_pelicula = Collections.synchronizedList(new ArrayList<proyeccion>());
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
       while(rs.next()){

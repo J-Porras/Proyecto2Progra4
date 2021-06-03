@@ -36,7 +36,7 @@ public class tiquetescompradosDAO {
     
     public tiqueteComprado  readbyId(int id) throws Exception {
         String sqlcommand = "select * from tiquetesComprados where id = ?";
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {
@@ -48,7 +48,7 @@ public class tiquetescompradosDAO {
       public List<tiqueteComprado>  asientos_ocupados_porProyeccion(int id) throws Exception {
         String sqlcommand = "select * from tiquetesComprados where id_proyeccion = ?";
           List<tiqueteComprado> asientos_ocupados = Collections.synchronizedList(new ArrayList<tiqueteComprado>());
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
       while(rs.next()){
@@ -66,7 +66,7 @@ public class tiquetescompradosDAO {
        public List<tiqueteComprado>  proyeccion_cliente(String id) throws Exception {
         String sqlcommand = "select * from tiquetesComprados where id_cliente = ?";
           List<tiqueteComprado> asientos_cliente = Collections.synchronizedList(new ArrayList<tiqueteComprado>());
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setString(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
       while(rs.next()){
