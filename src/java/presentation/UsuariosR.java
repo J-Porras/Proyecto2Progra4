@@ -22,7 +22,7 @@ import usuarios.Logic.usuarios;
 
 /**
  *
- * @author pg300
+ * @author pgat3000
  */
 @Path("/usuarios")
 public class UsuariosR {

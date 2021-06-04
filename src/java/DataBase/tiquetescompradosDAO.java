@@ -80,6 +80,7 @@ public class tiquetescompradosDAO {
       }
       return asientos_cliente;
     }
+    
     public tiqueteComprado create(tiqueteComprado pel) throws SQLException, Exception {
         String sqlcommand = "insert into tiquetesComprados (id_proyeccion,id_cliente,asiento)"
                 + "values(?,?,?)";
@@ -92,5 +93,23 @@ public class tiquetescompradosDAO {
             throw new Exception("Proyeccion ya existe");
         }
         return pel;
+    }
+    
+    public List<tiqueteComprado>  listaProyecciones() throws Exception {
+        String sqlcommand = "select * from salas ";
+          List<tiqueteComprado> tiqueteComprados = Collections.synchronizedList(new ArrayList<tiqueteComprado>());
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+       
+        ResultSet rs = Database.instance().executeQuery(stm);
+      while(rs.next()){
+             tiqueteComprado p = new tiqueteComprado();
+            p.setId(rs.getInt("id"));
+            p.setAsiento(rs.getString("asiento"));
+            p.setId_cliente(rs.getString("id_cliente"));
+            p.setId_proyeccion(rs.getInt("id_proyeccion"));
+            tiqueteComprados.add(p);
+
+      }
+      return tiqueteComprados;
     }
 }

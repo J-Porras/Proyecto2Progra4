@@ -8,6 +8,9 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import salas.Logic.sala;
 
 /**
@@ -38,6 +41,22 @@ public class salasDAO {
         }
     }
     
+    public List<sala>  listaSalas() throws Exception {
+        String sqlcommand = "select * from salas ";
+          List<sala> salas = Collections.synchronizedList(new ArrayList<sala>());
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+       
+        ResultSet rs = Database.instance().executeQuery(stm);
+      while(rs.next()){
+           sala p = new sala();
+            p.setId(Integer.parseInt(rs.getString("id")));
+            p.setNombre(rs.getString("nombre"));
+            salas.add(p);
+
+      }
+      return salas;
+    }
+     
     public sala create(sala sala) throws SQLException, Exception {
         String sqlcommand = "insert into salas (id,nombre)"
                 + "values(?,?)";

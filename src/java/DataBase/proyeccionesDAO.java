@@ -63,7 +63,24 @@ public class proyeccionesDAO {
       }
       return proyeccion_pelicula;
     }
-     
+     public List<proyeccion>  listaProyecciones() throws Exception {
+        String sqlcommand = "select * from salas ";
+          List<proyeccion> proyecciones = Collections.synchronizedList(new ArrayList<proyeccion>());
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+       
+        ResultSet rs = Database.instance().executeQuery(stm);
+      while(rs.next()){
+            proyeccion p = new proyeccion();
+            p.setId(Integer.parseInt(rs.getString("id")));
+            p.setSala_id(rs.getInt("sala_id"));
+            p.setHora(rs.getString("hora"));
+            p.setPelicula_id(rs.getInt("pelicula_id"));
+           
+            proyecciones.add(p);
+
+      }
+      return proyecciones;
+    }
     public proyeccion create(proyeccion pel) throws SQLException, Exception {
         String sqlcommand = "insert into proyecciones (sala_id,hora,pelicula_id)"
                 + "values(?,?,?)";
