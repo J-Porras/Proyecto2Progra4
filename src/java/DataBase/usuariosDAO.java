@@ -8,6 +8,10 @@ package DataBase;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import tiquetesComprados.Logic.tiqueteComprado;
 import usuarios.Logic.usuarios;
 
 /**
@@ -54,5 +58,23 @@ public class usuariosDAO {
             throw new Exception("Usuario ya existe");
         }
         return cl;
+    }
+    
+    public List<usuarios>  listaClientes() throws Exception {
+        String sqlcommand = "select * from Usuarios ";
+          List<usuarios> clientes = Collections.synchronizedList(new ArrayList<usuarios>());
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+       
+        ResultSet rs = Database.instance().executeQuery(stm);
+      while(rs.next()){
+         usuarios r= new usuarios();
+            r.setId(rs.getString("id"));
+            r.setNombre(rs.getString("nombre"));
+            r.setContrasenna(rs.getString("contrasenna"));
+            r.setRol(rs.getInt("rol"));
+            clientes.add(r);
+
+      }
+      return clientes;
     }
 }

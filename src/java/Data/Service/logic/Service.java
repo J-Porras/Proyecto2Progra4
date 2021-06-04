@@ -10,6 +10,7 @@ import DataBase.proyeccionesDAO;
 import DataBase.salasDAO;
 import DataBase.tiquetescompradosDAO;
 import DataBase.usuariosDAO;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,7 +81,9 @@ public class Service {
         return result;
         
     }
-    
+    public usuarios readbyidU(String id) throws Exception{
+        return usuariosDAO.readbyId(id);
+    }
     ///////////////////Peliculas
     
     public peliculas crearPelicula(peliculas peli){
@@ -157,6 +160,19 @@ public class Service {
     public List<proyeccion> proyeccionPelicula(int proyeccion_id) {
         try {
             return this.proyecciondao.proyeccion_porPelicula(proyeccion_id);
+        } catch (Exception e) {
+            return null;
+        }
+        }
+    public List<usuarios> usuariosSearch(String nombre) throws Exception {
+        List<usuarios> result = new ArrayList<>();
+        List<usuarios> uList= usuariosDAO.listaClientes();
+        try {
+           for(usuarios u:uList){
+               if(u.getNombre().contains(nombre))
+                   result.add(u);
+           } 
+            return result;
         } catch (Exception e) {
             return null;
         }

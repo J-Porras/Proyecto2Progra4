@@ -13,7 +13,7 @@ use cine;
 DROP TABLE IF EXISTS `peliculas`;
 
 CREATE TABLE `peliculas` (
-  `id` int  NOT NULL AUTO_INCREMENT,,
+  `id` int  NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL ,
    `precio` double DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -22,7 +22,7 @@ CREATE TABLE `peliculas` (
 DROP TABLE IF EXISTS `salas`;
 
 CREATE TABLE `salas` (
-  `id` int  NOT NULL AUTO_INCREMENT,,
+  `id` int  NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL ,
   PRIMARY KEY (`id`)
 ) ;
@@ -31,7 +31,7 @@ CREATE TABLE `salas` (
 DROP TABLE IF EXISTS `proyecciones`;
 
 CREATE TABLE `proyecciones` (
-  `id` int NOT NULL AUTO_INCREMENT,,
+  `id` int NOT NULL AUTO_INCREMENT,
   `sala_id` int  NOT NULL ,
     `hora` varchar(50) NOT NULL ,
   `pelicula_id` int,
@@ -54,18 +54,18 @@ CREATE TABLE `usuarios` (
 DROP TABLE IF EXISTS `tiquetesComprados`;
 
 CREATE TABLE `tiquetesComprados` (
-  `id` int NOT NULL AUTO_INCREMENT,,
+  `id` int NOT NULL AUTO_INCREMENT,
   `id_proyeccion` int DEFAULT NULL,
-  `id_cliente` varchar(9) DEFAULT NULL,
+  `id_cliente` varchar(50) NOT NULL,
   `asiento` varchar(9) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id` ,`id_cliente`,`asiento`),
-  CONSTRAINT `proyec_fk` FOREIGN KEY (`id_proyeccion`) REFERENCES `proyecciones`` (`id`),
-  CONSTRAINT `profe_fk` FOREIGN KEY (`id_cliente`) REFERENCES `usuarios` (`id`)
+  CONSTRAINT `proyec_fk` FOREIGN KEY (`id_proyeccion`) REFERENCES `proyecciones` (`id`),
+  CONSTRAINT `cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `usuarios` (`id`)
 );
 
 
 insert into Usuarios (id,nombre,contrasenna,rol) values('1234', 'Pedro Admin','1234',0);
-insert into Usuarios (id,nombre,contrasenna,rol) values('1234', 'Diana Prueba','1234',1);
+insert into Usuarios (id,nombre,contrasenna,rol) values('4321', 'Diana Prueba','1234',1);
 select * from Usuarios;
 
 insert into peliculas (nombre,precio) values( 'Avengers',1500);
