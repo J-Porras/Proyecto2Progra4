@@ -35,7 +35,7 @@ public class proyeccionesDAO {
         
     
     public proyeccion  readbyId(int id) throws Exception {
-        String sqlcommand = "select * from proyeccion where id = ?";
+        String sqlcommand = "select * from proyecciones where id = ?";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
@@ -47,7 +47,7 @@ public class proyeccionesDAO {
     }
     
      public List<proyeccion>  proyeccion_porPelicula(int id) throws Exception {
-        String sqlcommand = "select * from tiquetesComprados where pelicula_id = ?";
+        String sqlcommand = "select * from proyecciones where pelicula_id = ?";
           List<proyeccion> proyeccion_pelicula = Collections.synchronizedList(new ArrayList<proyeccion>());
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, id);
@@ -64,7 +64,7 @@ public class proyeccionesDAO {
       return proyeccion_pelicula;
     }
      public List<proyeccion>  listaProyecciones() throws Exception {
-        String sqlcommand = "select * from salas ";
+        String sqlcommand = "select * from proyecciones ";
           List<proyeccion> proyecciones = Collections.synchronizedList(new ArrayList<proyeccion>());
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        

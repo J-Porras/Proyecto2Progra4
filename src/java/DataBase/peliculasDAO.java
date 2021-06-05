@@ -32,10 +32,10 @@ public class peliculasDAO {
     }
         
     
-    public peliculas readbyId(String id) throws Exception {
+    public peliculas readbyId(int id) throws Exception {
         String sqlcommand = "select * from peliculas where id = ?";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-        stm.setString(1, id);
+        stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {
             return from(rs);

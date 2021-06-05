@@ -32,7 +32,7 @@ public class SalasR {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public sala get(@PathParam("id") String id) {
+    public sala get(@PathParam("id") int id) {
         try {
             return Service.instance().readbyidS(id);
         } catch (Exception ex) {

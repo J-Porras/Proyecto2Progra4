@@ -85,7 +85,7 @@ public class Service {
         return usuariosDAO.readbyId(id);
     }
     ///////////////////Peliculas
-     public peliculas readbyidP(String id) throws Exception{
+     public peliculas readbyidP(int id) throws Exception{
         return peliculasDAO.readbyId(id);
     }
      
@@ -105,7 +105,7 @@ public class Service {
     }
     
     /////////////////////////salas
-    public sala readbyidS(String id) throws Exception{
+    public sala readbyidS(int id) throws Exception{
         return salasDAO.readbyId(id);
     }
     
@@ -162,7 +162,9 @@ public class Service {
         }
     }
          
-         
+       public proyeccion readbyidPr(int id) throws Exception{
+        return proyecciondao.readbyId(id);
+    } 
     public List<proyeccion> proyeccionPelicula(int proyeccion_id) {
         try {
             return this.proyecciondao.proyeccion_porPelicula(proyeccion_id);
@@ -204,6 +206,24 @@ public class Service {
         try {
            for(sala u:uList){
                if(u.getNombre().contains(nombre))
+                   result.add(u);
+              
+           } 
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+        }
+       
+      public List<proyeccion> proyeccionSearchPelicula(int id_pelicula) throws Exception {
+        List<proyeccion> result = new ArrayList<>();
+        List<proyeccion> uList= proyecciondao.listaProyecciones();
+        try {
+            if(id_pelicula==0){
+                return uList;
+            }
+           for(proyeccion u:uList){
+               if(u.getPelicula_id()==id_pelicula)
                    result.add(u);
               
            } 

@@ -32,7 +32,7 @@ public class PeliculasR {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public peliculas get(@PathParam("id") String id) {
+    public peliculas get(@PathParam("id") int id) {
         try {
             return Service.instance().readbyidP(id);
         } catch (Exception ex) {

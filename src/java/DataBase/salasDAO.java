@@ -29,10 +29,10 @@ public class salasDAO {
         }
     }
     
-    public sala readbyId(String id) throws Exception {
+    public sala readbyId(int id) throws Exception {
         String sqlcommand = "select * from salas where id = ?";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-        stm.setString(1, id);
+        stm.setInt(1, id);
         ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {
             return from(rs);
