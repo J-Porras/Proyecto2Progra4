@@ -95,8 +95,8 @@ public class tiquetescompradosDAO {
         return pel;
     }
     
-    public List<tiqueteComprado>  listaProyecciones() throws Exception {
-        String sqlcommand = "select * from salas ";
+    public List<tiqueteComprado>  listatiquetesComprados() throws Exception {
+        String sqlcommand = "select * from tiquetesComprados ";
           List<tiqueteComprado> tiqueteComprados = Collections.synchronizedList(new ArrayList<tiqueteComprado>());
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        

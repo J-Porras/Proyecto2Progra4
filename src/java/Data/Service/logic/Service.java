@@ -84,6 +84,9 @@ public class Service {
     public usuarios readbyidU(String id) throws Exception{
         return usuariosDAO.readbyId(id);
     }
+     public tiqueteComprado readbyidTc(int id) throws Exception{
+        return this.tiquetescompradosDao.readbyId(id);
+    }
     ///////////////////Peliculas
      public peliculas readbyidP(int id) throws Exception{
         return peliculasDAO.readbyId(id);
@@ -232,4 +235,20 @@ public class Service {
             return null;
         }
         }
+      
+         public List<tiqueteComprado> tiqueteCompradoSearchCliente(String id_cliente) throws Exception {
+        List<tiqueteComprado> result = new ArrayList<>();
+        List<tiqueteComprado> uList= this.tiquetescompradosDao.listatiquetesComprados();
+            try{
+           for(tiqueteComprado u:uList){
+               if(u.getId_cliente().contains(id_cliente))
+                   result.add(u);
+              
+           } 
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+        }
+      
 }
