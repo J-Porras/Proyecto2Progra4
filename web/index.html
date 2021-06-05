@@ -6,22 +6,39 @@
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Cinema24+1</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' href='css/estilo.css'>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+        <link rel='stylesheet' type='text/css' href='css/estilo.css'>
+
        
     </head>
 
     <body>
-        
+        <!--
         <header class="navbar" id="navbar">
             <a href="">Cinema24+1</a>
-            <button class="open-button" id="toggleLogin">Iniciar sesion</button>
+            <button class="open-button" id="aaa">Iniciar sesion</button>
 
-        </header>
-
-
+        </header>-->
+        
+        
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #234790;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Cinema 24+1</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <button type="button" class="btn btn-primary"  id="toggleLogin">Iniciar Sesion</button>  
+                </div>
+              </div>
+            </div>
+        </nav>
+        
+        
         <!--Form de iniciar sesion-->
         <div class="form-popup" id="FormLogin" >
             <form action="" class="form-container">
@@ -35,7 +52,6 @@
         
         
         <div class="movies" id="movies">
-
         </div>
         <div class="movie-container">
             <label>Elija una pelicula</label>
@@ -130,11 +146,15 @@
                 <div class="seat"></div>
             </div>
         </div>
-        <p class="text">Se han elegido
+        <p class="text-asientos">Se han elegido
             <span id="count">0</span>
             por el precio total de $<span id="total">0</span>
         </p>
+         
         <script src='script/main.js'></script>
+
+            
+
     </body>
 
 </html>

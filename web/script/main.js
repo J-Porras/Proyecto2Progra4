@@ -95,6 +95,7 @@ function openForm() {
   $('#toggleLogin').click(
     
     function(){
+        console.log('aa')
       $('#FormLogin').show();
     }
 
@@ -187,7 +188,7 @@ function fetchAndList(){
 
 //nav bar cambia si hay un usuario conectado
 function loadNavbar(){
-  const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById('navbarNavAltMarkup');
 
   console.log(localStorage.getItem('usuario_actual'))
   //creando boton de logout
@@ -198,10 +199,20 @@ function loadNavbar(){
 
     })
     .click(clickLogout)
-    .addClass('open-button')
-
-    $('#navbar').append(logoutBtn);
+    .addClass('btn btn-primary')
+    .attr('type', 'text');
+    
+    
+    $('#navbarNavAltMarkup').append(logoutBtn);
+    
+    
+  
+    
+    
     $('#toggleLogin').hide();
+    
+    
+    
   }
   else{
     var logoutBtn = $('#logoutBtn');
@@ -219,6 +230,7 @@ function reloadPage(){
   location.reload()
   reload = reload - 1;
 }
+
 
 
 

@@ -7,33 +7,17 @@
 /*
   Header
 */
-.navbar{
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 57px;
-    background-image:url("../images/background2.jpg");
-    overflow: hidden;
-    display: inline-block;
-    font-size: 22px;
-    padding-top: 10px;
 
-}
-.navbar a{
-    text-decoration: none;
-    color: white;
-    margin-right: 5px;
-}
 /*
   Acá empieza el espacio de css para la selección de los asientos en las salas de cine
 */
 body {
-    padding-top: 20%; 
-    background: rgb(28, 28, 29);
-    background: linear-gradient(66deg, rgb(25, 25, 26) 0%, rgb(25, 25, 27) 100%);
+    /*padding-top: 20%; */
+    background: rgb(31, 31, 46);
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    
     justify-content: center;
     height: 100vh;
     font-family: 'Lato', sans-serif;
@@ -41,8 +25,21 @@ body {
     color: #ffff;
 }
 
+
+.text-asientos
+ {
+    align-items: center;
+    margin: auto;
+
+}
+
+
 .movie-container {
     margin: 20px 0;
+      margin: auto;
+
+    align-items: center;
+    
 }
 
 .movie-container select {
@@ -63,6 +60,7 @@ body {
 }
 
 .seat {
+    position: static;
     background-color: #444451;
     height: 15px;
     width: 15px;
@@ -105,6 +103,9 @@ body {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+      margin: auto;
+
 }
 
 .showcase li {
@@ -112,14 +113,20 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0 10px;
+    align-items: center;
 }
 
 .showcase li small {
     margin-left: 2px;
+    align-items: center;
 }
 
 .row {
-    display: flex;
+
+    justify-content: center;
+    
+    
+    
 }
 
 .screen {
@@ -212,7 +219,6 @@ form h1{
 /*Sección de las peliculas*/
 .movies{
     width: 100%;
-    padding-top: 15%;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
     grid-gap: 10px;
