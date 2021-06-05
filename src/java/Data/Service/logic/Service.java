@@ -85,7 +85,10 @@ public class Service {
         return usuariosDAO.readbyId(id);
     }
     ///////////////////Peliculas
-    
+     public peliculas readbyidP(String id) throws Exception{
+        return peliculasDAO.readbyId(id);
+    }
+     
     public peliculas crearPelicula(peliculas peli){
         peliculas result = null;
         
@@ -102,6 +105,9 @@ public class Service {
     }
     
     /////////////////////////salas
+    public sala readbyidS(String id) throws Exception{
+        return salasDAO.readbyId(id);
+    }
     
     public sala crearSala(sala s){
         sala result = null;
@@ -171,6 +177,35 @@ public class Service {
            for(usuarios u:uList){
                if(u.getNombre().contains(nombre))
                    result.add(u);
+           } 
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+        }
+    
+      public List<peliculas> peliculasSearch(String nombre) throws Exception {
+        List<peliculas> result = new ArrayList<>();
+        List<peliculas> uList= peliculasDAO.listaPeliculas();
+        try {
+           for(peliculas u:uList){
+               if(u.getNombre().contains(nombre))
+                   result.add(u);
+              
+           } 
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+        }
+       public List<sala> salaSearch(String nombre) throws Exception {
+        List<sala> result = new ArrayList<>();
+        List<sala> uList= salasDAO.listaSalas();
+        try {
+           for(sala u:uList){
+               if(u.getNombre().contains(nombre))
+                   result.add(u);
+              
            } 
             return result;
         } catch (Exception e) {

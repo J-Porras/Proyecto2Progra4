@@ -45,7 +45,7 @@ public class peliculasDAO {
     }
     
      public List<peliculas>  listaPeliculas() throws Exception {
-        String sqlcommand = "select * from salas ";
+        String sqlcommand = "select * from peliculas ";
           List<peliculas> peliculas = Collections.synchronizedList(new ArrayList<>());
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
@@ -69,7 +69,7 @@ public class peliculasDAO {
         stm.setString(2, Double.toString(pel.getPrecio()));
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
-            throw new Exception("Usuario ya existe");
+            throw new Exception("peliculas ya existe");
         }
         return pel;
     }
