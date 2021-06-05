@@ -28,7 +28,7 @@ import usuarios.Logic.usuarios;
 public class UsuariosR {
     String location="C:/AAA/images/";
     
-       @GET
+    @GET
     @Path("{cedula}")
     @Produces({MediaType.APPLICATION_JSON})
     public usuarios get(@PathParam("cedula") String cedula) {
@@ -38,11 +38,27 @@ public class UsuariosR {
             throw new NotFoundException(); 
         }
     }
-  @GET
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<usuarios> search(@DefaultValue("") @QueryParam("nombre") String nombre) throws Exception { 
         return Service.instance().usuariosSearch(nombre);
     } 
+    
+    @POST
+    @Path("{login}")
+    @Consumes(MediaType.APPLICATION_JSON) 
+    @Produces({MediaType.APPLICATION_JSON})
+    public usuarios login (usuarios u) {
+        try {
+            System.out.println("Inside LOGIN API");
+            
+
+            return Service.instance().readbyidU(u.getId());
+            
+        } catch (Exception ex) {
+            throw new NotFoundException(); 
+        }
+    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON) 

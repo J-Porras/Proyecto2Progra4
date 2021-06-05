@@ -60,7 +60,7 @@ public class Database extends MysqlDataSource{
                     database+"&user="+user+"&password="+password+"&serverTimezone=UTC";            
             Class.forName(driver).newInstance();
             
-            System.out.println("Database: Database inicializada");
+
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
             System.err.println(e.getMessage());

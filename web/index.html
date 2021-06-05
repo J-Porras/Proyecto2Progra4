@@ -8,23 +8,32 @@
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' type='text/css' href='css/estilo.css'>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+       
     </head>
 
     <body>
-        <header class="navbar">
+        
+        <header class="navbar" id="navbar">
             <a href="">Cinema24+1</a>
-            <button class="open-button" onclick="openForm()">Iniciar sesion</button>
+            <button class="open-button" id="toggleLogin">Iniciar sesion</button>
+
         </header>
-        <div class="form-popup" id="myForm">
+
+
+        <!--Form de iniciar sesion-->
+        <div class="form-popup" id="FormLogin" >
             <form action="" class="form-container">
-                <img class="" src="images/x.jpg" alt="Cerrar" onclick="closeForm()">
+                <img class="" src="images/x.jpg" alt="Cerrar" id="closeFormLogin">
                 <h1>Login</h1>
-                <input type="text" placeholder="Usuario" name="-" required>
-                <input type="password" placeholder="Contraseña" name="-" required>
-                <button type="submit" class="btn">Login</button>
+                <input type="text" id = "idlogin" placeholder="ID" name="-" required>
+                <input type="password" id="contrasena" placeholder="Contraseña" name="-" required>
+                <button type="submit" class="btn" id="btnLogin">Login</button>
             </form>
         </div>
+        
+        
         <div class="movies" id="movies">
 
         </div>
@@ -37,6 +46,7 @@
                 <option value="9">The Lion King ($9)</option>
             </select>
         </div>
+        
         <ul class="showcase">
             <li>
                 <div class="seat"></div>
@@ -51,7 +61,7 @@
                 <small>Ocupado</small>
             </li>
         </ul>
-
+        
         <div class="container">
             <div class="screen"></div>
             <div class="row">
@@ -120,7 +130,6 @@
                 <div class="seat"></div>
             </div>
         </div>
-
         <p class="text">Se han elegido
             <span id="count">0</span>
             por el precio total de $<span id="total">0</span>
