@@ -26,6 +26,7 @@ public class proyeccionesDAO {
             p.setId(Integer.parseInt(rs.getString("id")));
             p.setSala_id(rs.getInt("sala_id"));
             p.setHora(rs.getString("hora"));
+             p.setHora(rs.getString("hora"));
             p.setPelicula_id(rs.getInt("pelicula_id"));
             return p;
         } catch (SQLException ex) {
@@ -57,6 +58,7 @@ public class proyeccionesDAO {
             p.setId(Integer.parseInt(rs.getString("id")));
             p.setSala_id(rs.getInt("sala_id"));
             p.setHora(rs.getString("hora"));
+            p.setFecha(rs.getString("fecha"));
             p.setPelicula_id(rs.getInt("pelicula_id"));
             proyeccion_pelicula.add(p);
 
@@ -74,6 +76,7 @@ public class proyeccionesDAO {
             p.setId(Integer.parseInt(rs.getString("id")));
             p.setSala_id(rs.getInt("sala_id"));
             p.setHora(rs.getString("hora"));
+             p.setFecha(rs.getString("fecha"));
             p.setPelicula_id(rs.getInt("pelicula_id"));
            
             proyecciones.add(p);
@@ -82,13 +85,14 @@ public class proyeccionesDAO {
       return proyecciones;
     }
     public proyeccion create(proyeccion pel) throws SQLException, Exception {
-        String sqlcommand = "insert into proyecciones (sala_id,hora,pelicula_id)"
-                + "values(?,?,?)";
+        String sqlcommand = "insert into proyecciones (sala_id,fecha,hora,pelicula_id)"
+                + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setInt(1, pel.getSala_id());
-        stm.setString(2, pel.getHora());
+            stm.setString(2, pel.getFecha());
+        stm.setString(3, pel.getHora());
        
-        stm.setInt(3, pel.getPelicula_id());
+        stm.setInt(4, pel.getPelicula_id());
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("Proyeccion ya existe");

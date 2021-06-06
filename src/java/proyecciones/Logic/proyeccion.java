@@ -12,18 +12,30 @@ package proyecciones.Logic;
 public class proyeccion {
    private int id;
    private int sala_id;
+   private String fecha;
    private String hora;
    private int pelicula_id;
 
     public proyeccion() {
     }
 
-    public proyeccion(int id, int sala_id, String hora, int pelicula_id) {
+    public proyeccion(int id, int sala_id, String fecha, String hora, int pelicula_id) {
         this.id = id;
         this.sala_id = sala_id;
+        this.fecha = fecha;
         this.hora = hora;
         this.pelicula_id = pelicula_id;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    
 
     public int getId() {
         return id;

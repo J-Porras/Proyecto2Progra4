@@ -24,6 +24,7 @@ public class peliculasDAO {
             peliculas p = new peliculas();
             p.setId(Integer.parseInt(rs.getString("id")));
             p.setNombre(rs.getString("nombre"));
+            p.setCartelera(rs.getBoolean("cartelera"));
             p.setPrecio(Double.parseDouble(rs.getString("precio")));
             return p;
         } catch (SQLException ex) {
@@ -54,6 +55,7 @@ public class peliculasDAO {
           peliculas p = new peliculas();
             p.setId(Integer.parseInt(rs.getString("id")));
             p.setNombre(rs.getString("nombre"));
+            p.setCartelera(rs.getBoolean("cartelera"));
             p.setPrecio(Double.parseDouble(rs.getString("precio")));
             peliculas.add(p);
 
@@ -62,15 +64,27 @@ public class peliculasDAO {
     }
     
     public peliculas create(peliculas pel) throws SQLException, Exception {
-        String sqlcommand = "insert into peliculas (nombre,precio)"
-                + "values(?,?)";
+        String sqlcommand = "insert into peliculas (nombre,precio,cartelera)"
+                + "values(?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setString(1, pel.getNombre());
         stm.setString(2, Double.toString(pel.getPrecio()));
+        stm.setBoolean(3, pel.getCartelera()); 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("peliculas ya existe");
         }
         return pel;
+    }
+    
+      public void update_estado(int id) throws SQLException, Exception {
+        String sqlcommand = "update peliculas set cartelera=? where id=?";
+        Boolean estado;
+        estado = !this.readbyId(id).getCartelera();
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        stm.setBoolean(1, estado);
+        stm.setInt(2, id);
+        System.out.println(stm);
+        Database.instance().executeUpdate(stm);
     }
 }

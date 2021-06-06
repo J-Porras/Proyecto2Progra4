@@ -13,16 +13,27 @@ public class peliculas {
     private int id;
     private String nombre;
     private Double precio;
+    private Boolean cartelera;
 
     public peliculas() {
     }
 
-    public peliculas(int id, String nombre, Double precio) {
+    public peliculas(int id, String nombre, Double precio, Boolean cartelera) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.cartelera = cartelera;
     }
 
+    public Boolean getCartelera() {
+        return cartelera;
+    }
+
+    public void setCartelera(Boolean cartelera) {
+        this.cartelera = cartelera;
+    }
+
+    
     public int getId() {
         return id;
     }
