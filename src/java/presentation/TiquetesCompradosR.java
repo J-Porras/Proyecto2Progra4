@@ -44,6 +44,10 @@ public class TiquetesCompradosR {
        
         return Service.instance().tiqueteCompradoSearchCliente(id_cliente);
     } 
+    public List<tiqueteComprado> searchOcupados(@DefaultValue("0") @QueryParam("id_proyecciones") String id_proyecciones) throws Exception { 
+        int id= Integer.parseInt(id_proyecciones);
+        return Service.instance().AsientosOcupados(id);
+    } 
     
     
     @POST

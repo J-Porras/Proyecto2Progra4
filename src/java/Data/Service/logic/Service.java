@@ -250,5 +250,22 @@ public class Service {
             return null;
         }
         }
+          public List<tiqueteComprado> AsientosOcupados(int id_proyeccion) throws Exception {
+        List<tiqueteComprado> result = new ArrayList<>();
+        List<tiqueteComprado> uList= this.tiquetescompradosDao.listatiquetesComprados();
+            try{
+                if(id_proyeccion==0){
+                return uList;
+            }
+           for(tiqueteComprado u:uList){
+               if(u.getId_proyeccion()==id_proyeccion)
+                   result.add(u);
+              
+           } 
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+        }
       
 }
