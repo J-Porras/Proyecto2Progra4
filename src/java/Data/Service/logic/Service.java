@@ -10,6 +10,7 @@ import DataBase.proyeccionesDAO;
 import DataBase.salasDAO;
 import DataBase.tiquetescompradosDAO;
 import DataBase.usuariosDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -267,5 +268,13 @@ public class Service {
             return null;
         }
         }
+          
+           public void updateCartelera(int id) throws Exception {
+        try {
+           this.peliculasDAO.update_cartelera(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
       
 }

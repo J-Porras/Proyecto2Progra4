@@ -77,7 +77,7 @@ public class peliculasDAO {
         return pel;
     }
     
-      public void update_estado(int id) throws SQLException, Exception {
+      public void update_cartelera(int id) throws SQLException, Exception {
         String sqlcommand = "update peliculas set cartelera=? where id=?";
         Boolean estado;
         estado = !this.readbyId(id).getCartelera();
