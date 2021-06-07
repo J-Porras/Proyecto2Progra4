@@ -15,7 +15,6 @@ DROP TABLE IF EXISTS `peliculas`;
 CREATE TABLE `peliculas` (
   `id` int  NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL ,
-   `descripcion` varchar(5000) NOT NULL ,
    `precio` double DEFAULT NULL,
    `cartelera` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -71,7 +70,7 @@ insert into Usuarios (id,nombre,contrasenna,rol) values('1234', 'Pedro Admin','1
 insert into Usuarios (id,nombre,contrasenna,rol) values('4321', 'Diana Prueba','1234',1);
 select * from Usuarios;
 
-insert into peliculas (nombre,descripcion,precio,cartelera) values( 'Avengers','Pelicual de SuperHeroes',1500,TRUE);
+insert into peliculas (nombre,precio,cartelera) values( 'Avengers',1500,TRUE);
 select * from peliculas;
 insert into salas (nombre) values( 'Sala 1');
 select * from salas;

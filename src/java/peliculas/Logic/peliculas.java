@@ -12,30 +12,18 @@ package peliculas.Logic;
 public class peliculas {
     private int id;
     private String nombre;
-    private String descripcion;
     private Double precio;
     private Boolean cartelera;
 
     public peliculas() {
     }
 
-    public peliculas(int id, String nombre, String descripcion, Double precio, Boolean cartelera) {
+    public peliculas(int id, String nombre, Double precio, Boolean cartelera) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
         this.cartelera = cartelera;
     }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-   
 
     public Boolean getCartelera() {
         return cartelera;
