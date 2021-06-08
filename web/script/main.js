@@ -110,7 +110,6 @@ function closeForm() {
       $('#FormLogin').hide();
     }
   );
-//  document.getElementById("myForm").style.display = "none";
 }
 
 
@@ -128,7 +127,7 @@ function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
   alert('Sesion cerrada')
-  loadNavbar();
+
 }
 
 //iniciar sesion
@@ -186,52 +185,6 @@ function fetchAndList(){
 }*/
 
 
-//nav bar cambia si hay un usuario conectado
-function loadNavbar(){
-  const navbar = document.getElementById('navbarNavAltMarkup');
-
-  console.log(localStorage.getItem('usuario_actual'))
-  //creando boton de logout
-  if(localStorage.getItem('usuario_actual')){//si hay usuario
-    var logoutBtn = $('<button/>',{
-      text : 'Cerrar Sesion',
-      id : 'logoutBtn',
-
-    })
-    .click(clickLogout)
-    .addClass('btn btn-primary')
-    .attr('type', 'text');
-    
-    
-    $('#navbarNavAltMarkup').append(logoutBtn);
-    
-    
-  
-    
-    
-    $('#toggleLogin').hide();
-    
-    
-    
-  }
-  else{
-    var logoutBtn = $('#logoutBtn');
-    if (logoutBtn){ //si no hay usuario y el boton de logOut anda por ahi
-      $('#logoutBtn').hide()
-      $('#toggleLogin').show();
-
-    }
-  }
-    
-    
-}
-
-function reloadPage(){
-  location.reload()
-  reload = reload - 1;
-}
-
-
 
 
 updateSelectedCount();
@@ -239,7 +192,6 @@ updateSelectedCount();
 function whenloaded(){
   
   clickLogin();
-  loadNavbar();
   openForm();
   closeForm();
 }
