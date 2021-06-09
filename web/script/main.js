@@ -95,7 +95,7 @@ function openForm() {
   $('#toggleLogin').click(
     
     function(){
-        console.log('aa')
+      console.log('aa')
       $('#FormLogin').show();
     }
 
@@ -113,6 +113,8 @@ function closeForm() {
 }
 
 
+
+
 function clickLogin(){
 
   $('#btnLogin').click(
@@ -122,11 +124,46 @@ function clickLogin(){
   );
 }
 
+
+//formulario de  register
+
+function openFormRegister() {
+  $('#toggleRegister').click(
+    
+    function(){
+      console.log('Modal Register')
+      $('#FormRegister').show();
+    }
+
+  );
+}
+
+function closeFormRegister() {
+  $('#closeFormRegister').click(
+    function(){
+      $('#FormRegister').hide();
+    }
+  );
+}
+
+
+function clickRegister(){
+
+  $('#btnRegister').click(
+    function(){
+      register();
+    }
+  );
+}
+
+
+
 //cerrar sesion
 function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
   alert('Sesion cerrada')
+  location.reload();
 
 }
 
@@ -165,7 +202,41 @@ function login(){
   })();
 }
 
+function register(){
 
+  console.log('INSIDE REGISTER')
+
+  let new_user = {contrasenna:"-",id:"-",nombre:"-",rol:"1"};//nuevo usuario es normie
+  new_user.nombre = $('#nombreregister').val();
+  new_user.id = $('#idregister').val();
+  new_user.contrasenna = $('#contrasenaregister').val();
+
+
+  console.log('SENDING REQUEST ' + JSON.stringify(new_user))
+
+  let request = new Request(url + 'api/usuarios/registrarse',
+  {method: 'POST',headers :{'Content-Type': 'application/json'},
+  body: JSON.stringify(new_user)}
+  );
+
+  (async () =>{
+    console.log('Async()');
+
+    const response = await fetch(request);
+
+    if(!response.ok){
+      console.log('error Register')
+      //falta modal para erorres o con bootstrap o un alert
+      return;
+    }
+    console.log('nice register');
+    alert('Usuario registrado exitosamente')
+    //console.log(current_user)
+    //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
+  })();
+
+
+}
 
 
 
@@ -192,8 +263,11 @@ updateSelectedCount();
 function whenloaded(){
   
   clickLogin();
+  clickRegister();
   openForm();
   closeForm();
+  openFormRegister();
+  closeFormRegister();
 }
 
 $(whenloaded);

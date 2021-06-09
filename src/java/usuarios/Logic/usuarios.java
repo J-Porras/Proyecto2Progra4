@@ -25,6 +25,9 @@ public class usuarios {
     public usuarios() {
     }
     
+    public void cleanPassword(){
+        this.contrasenna = "";
+    }
 
     
     public String getId() {

@@ -26,9 +26,18 @@ var defaultNavBar =
 function changeNavBar(){
   const navbar = document.getElementById('navbarNavAltMarkup');
 
-  console.log(localStorage.getItem('usuario_actual'))
+  console.log('Current user:' + localStorage.getItem('usuario_actual'))
+  
+
+  
+
+
   //creando boton de logout
   if(localStorage.getItem('usuario_actual')){//si hay usuario
+
+    let rol_actual = JSON.parse(localStorage.getItem('usuario_actual')).rol
+    
+
     var logoutBtn = $('<button/>',{
       text : 'Cerrar Sesion',
       id : 'logoutBtn',
@@ -41,9 +50,17 @@ function changeNavBar(){
     $('#navbarNavAltMarkup').append(logoutBtn);
     
     $('#toggleLogin').hide();
-    let rol_actual = JSON.parse(localStorage.getItem('usuario_actual')).rol
 
-    console.log('Rol actual' + rol_actual)
+
+
+    
+    let registertoggleButton = $('registerBtn').hide();
+
+    if (registertoggleButton) { // si hay un usuario oculta el boton de register
+      $('registerBtn').hide();
+    }
+    
+
 
 
 
@@ -99,11 +116,25 @@ function changeNavBar(){
   }
   else{
     var logoutBtn = $('#logoutBtn');
-    if (logoutBtn){ //si no hay usuario y el boton de logOut anda por ahi
+    if (logoutBtn){ //si no hay usuario y el boton de logout anda por ahi
       $('#logoutBtn').hide()
       $('#toggleLogin').show();
 
-    }
+
+
+    //boton de register
+    var registerBtn = $('<button/>',{
+      text : 'Registrarse',
+      id : 'toggleRegister',
+    })
+    .addClass('btn btn-primary .mx-auto')
+    .attr('type', 'text');
+    $('#navbarNavAltMarkup').append(registerBtn);
+
+
+
+
+    }//fin if
   }
     
     

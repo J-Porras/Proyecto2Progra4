@@ -51,9 +51,10 @@ public class UsuariosR {
     public usuarios login (usuarios u) {
         try {
             System.out.println("Inside LOGIN API");
-            
 
-            return Service.instance().readbyidU(u.getId());
+            usuarios new_user = Service.instance().readbyidU(u.getId());
+            new_user.cleanPassword();
+            return new_user;
             
         } catch (Exception ex) {
             throw new NotFoundException(); 
@@ -61,11 +62,18 @@ public class UsuariosR {
     }
     
     @POST
+    @Path("{registrarse}")
     @Consumes(MediaType.APPLICATION_JSON) 
     public void addU(usuarios p) {  
         try {
+            System.out.println("INSIDE REGISTER API");
+            
             Service.instance().crearUsuario(p);
+            System.out.println("INSIDE REGISTER API NICE");
+
         } catch (Exception ex) {
+            System.out.println("RIP ADD");
+
             throw new NotAcceptableException(); 
         }
     }

@@ -69,6 +69,9 @@ public class Service {
 
         try {
             result = usuariosDAO.readbyId(u.getId());
+            
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -82,6 +85,9 @@ public class Service {
         return result;
         
     }
+    
+    
+    
     public usuarios readbyidU(String id) throws Exception{
         return usuariosDAO.readbyId(id);
     }
