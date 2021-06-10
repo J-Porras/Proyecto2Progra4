@@ -7,7 +7,7 @@
 var defaultNavBar = 
         `<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #234790;">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Cinema 24+1</a>
+              <a class="navbar-brand" href="http://localhost:8080/Proyecto2Progra4/">Cinema 24+1</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -26,7 +26,6 @@ var defaultNavBar =
 function changeNavBar(){
   const navbar = document.getElementById('navbarNavAltMarkup');
 
-  console.log('Current user:' + localStorage.getItem('usuario_actual'))
   
 
   
@@ -66,7 +65,6 @@ function changeNavBar(){
 
     switch (rol_actual) {
         case 0:// admin //
-            console.log('inside swithc')
             var salasBtn = $('<button/>',{
                 text : 'Registrar Salas',
                 id : 'registrarSalasBtn',

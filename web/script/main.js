@@ -12,82 +12,90 @@ const movieSelect = document.getElementById('movie');
 const peliculas = document.getElementById('movies');
 
 
-// Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
-i = 0;
-while(i<10){
-  var div = document.createElement("div");
-  div.classList.add("mov-container");
-  var img = document. createElement("img");
-  img.classList.add('poster');
-  img.setAttribute('src','images/pelicula.jpg');
-  var descripcion = document.createElement("div");
-  descripcion.appendChild(document.createTextNode("afdsfasfadsfasdfasdfaiiadsbfijadsbifbasdijfiajsdbfjiabsdiufbasuidfb iufbadsiubfiuasdbfiusadbfuisdb sssssssskdsa nfldsknfosadknfoadsnfoikasdnfonasdokfa sd faidsnf óa{s kjfokasfosifoisdnfoiasdsssssssfasdfasdfasdfasdfasdfasdfDescripcion: "+ i));
-  descripcion.classList.add('descripcion');
-  descripcion.setAttribute("value",i);
-  div.appendChild(descripcion);
-  div.appendChild(img);
-  peliculas.appendChild(div);
-  i+=1;
-}
-populateUI();
+var current_title = $(document).attr('title');
 
-let ticketPrice = +movieSelect.value;
+if(current_title === 'Cinema24+1'){
+  // Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
+  i = 0;
+  while(i<10){
+    var div = document.createElement("div");
+    div.classList.add("mov-container");
+    var img = document. createElement("img");
+    img.classList.add('poster');
+    img.setAttribute('src','images/pelicula.jpg');
+    var descripcion = document.createElement("div");
+    descripcion.appendChild(document.createTextNode("afdsfasfadsfasdfasdfaiiadsbfijadsbifbasdijfiajsdbfjiabsdiufbasuidfb iufbadsiubfiuasdbfiusadbfuisdb sssssssskdsa nfldsknfosadknfoadsnfoikasdnfonasdokfa sd faidsnf óa{s kjfokasfosifoisdnfoiasdsssssssfasdfasdfasdfasdfasdfasdfDescripcion: "+ i));
+    descripcion.classList.add('descripcion');
+    descripcion.setAttribute("value",i);
+    div.appendChild(descripcion);
+    div.appendChild(img);
+    peliculas.appendChild(div);
+    i+=1;
+  }
+  populateUI();
 
-function setMovieData(movieIndex, moviePrice) {
-  localStorage.setItem('selectedMovieIndex', (movieIndex));
-  localStorage.setItem('selectedMoviePrice', (moviePrice));
-}
+  let ticketPrice = +movieSelect.value;
 
-function updateSelectedCount() {
-  const selectedSeats = document.querySelectorAll('.row .seat.selected');
-  const seatsIndex = [...selectedSeats].map((seat) =>{
-    return [...seats].indexOf(seat)
+  function setMovieData(movieIndex, moviePrice) {
+    localStorage.setItem('selectedMovieIndex', (movieIndex));
+    localStorage.setItem('selectedMoviePrice', (moviePrice));
+  }
+
+  function updateSelectedCount() {
+    const selectedSeats = document.querySelectorAll('.row .seat.selected');
+    const seatsIndex = [...selectedSeats].map((seat) =>{
+      return [...seats].indexOf(seat)
+    })
+
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
+    const selectedSeatsCount = selectedSeats.length;
+
+    count.innerText = selectedSeatsCount;
+    total.innerText = selectedSeatsCount * ticketPrice;
+  }
+
+  function populateUI() {
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
+    if (selectedSeats !== null && selectedSeats.length > 0) {
+      seats.forEach((seat, index) => {
+        if (selectedSeats.indexOf(index) > -1) {
+          seat.classList.add('selected');
+        }
+      });
+    }
+
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+    if(selectedMovieIndex !== null) {
+      movieSelect.selectedIndex = selectedMovieIndex;
+    }
+  }
+
+  movieSelect.addEventListener('change', (e) => {
+    ticketPrice = +e.target.value;
+    setMovieData(e.target.selectedIndex, e.target.value);
+    updateSelectedCount();
   })
 
-  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
-  const selectedSeatsCount = selectedSeats.length;
 
-  count.innerText = selectedSeatsCount;
-  total.innerText = selectedSeatsCount * ticketPrice;
-}
 
-function populateUI() {
-  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+  container.addEventListener('click', (e) => {
+    if (e.target.classList.contains('seat') && 
+    !e.target.classList.contains('occupied')
+    ) {
+      e.target.classList.toggle('selected');
 
-  if (selectedSeats !== null && selectedSeats.length > 0) {
-    seats.forEach((seat, index) => {
-      if (selectedSeats.indexOf(index) > -1) {
-        seat.classList.add('selected');
-      }
-    });
-  }
+      updateSelectedCount()
+    }
+  })
 
-  const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-
-  if(selectedMovieIndex !== null) {
-    movieSelect.selectedIndex = selectedMovieIndex;
-  }
-}
-
-movieSelect.addEventListener('change', (e) => {
-  ticketPrice = +e.target.value;
-  setMovieData(e.target.selectedIndex, e.target.value);
   updateSelectedCount();
-})
 
+}//fin if
 
-
-
-container.addEventListener('click', (e) => {
-  if (e.target.classList.contains('seat') && 
-  !e.target.classList.contains('occupied')
-  ) {
-    e.target.classList.toggle('selected');
-
-    updateSelectedCount()
-  }
-})
 
 //Formulario de Login
 function openForm() {
@@ -95,7 +103,6 @@ function openForm() {
   $('#toggleLogin').click(
     
     function(){
-      console.log('aa')
       $('#FormLogin').show();
     }
 
@@ -122,6 +129,15 @@ function clickLogin(){
       login();
     }
   );
+}
+
+//cerrar sesion
+function clickLogout(){
+  
+  localStorage.removeItem('usuario_actual');
+  alert('Sesion cerrada')
+  location.reload();
+
 }
 
 
@@ -159,21 +175,13 @@ function clickRegister(){
 
 
 
-//cerrar sesion
-function clickLogout(){
-  
-  localStorage.removeItem('usuario_actual');
-  alert('Sesion cerrada')
-  location.reload();
-
-}
 
 //envia al url de nuea Sala
 function clickNuevaSala(){
   
   $('#registrarSalasBtn').click(
     function(){
-      console.log('nueva sala')
+
       document.location = url + "registrarSala.html";
     }
   );
@@ -198,20 +206,20 @@ function login(){
     body: JSON.stringify(current_user)}
   );
 
-  console.log('saliendo de request');
+
 
   (async () =>{
-    console.log('Async()');
+
 
     const response = await fetch(request);
 
     if(!response.ok){
-      console.log('error login')
+
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
-    console.log('nice');
     current_user = await response.json();
+
     console.log(current_user);
     //console.log(current_user)
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));
@@ -256,41 +264,6 @@ function register(){
 }
 
 
-function newSala(){
-  var nombreSala = $('#nuevasalanombre')
-  var salas = getSalasForm();//todas las salas
-  salas.forEach(
-    (element) =>{
-      if(nombreSalaValido(element,nombreSala)){
-        alert('Nueva Sala creada FALTA DEVOLVERLA')
-      }
-      else{
-        alert('Nombre de Sala no valido')
-      }
-    }
-
-  )
-
-}
-
-
-
-function getSalasForm(){//retorna las salas del ul en formato JS array
-  var salas =  $(".dropdown-item").map(function() {
-    return this.innerHTML;
-  }).get();
-}
-
-function nombreSalaValido(sala,nombre){
-  if(sala.text === nombre){
-    return false
-
-  }
-  return true  
-}
-
-
-
 
 /*el fetch and list en nuestro caso devuelve la lista de proyecciones
 para insertarlas en las salas, es lo primero que hace el browser 
@@ -310,7 +283,6 @@ function fetchAndList(){
 
 
 
-updateSelectedCount();
 
 function whenloaded(){
   
@@ -323,7 +295,6 @@ function whenloaded(){
   openFormRegister();
   closeFormRegister();
 
-  newSala();
 }
 
 $(whenloaded);
