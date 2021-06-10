@@ -214,7 +214,7 @@ function register(){
 
   console.log('SENDING REQUEST ' + JSON.stringify(new_user))
 
-  let request = new Request(url + 'api/usuarios/registrarse',
+  let request = new Request(url + 'api/usuarios',
   {method: 'POST',headers :{'Content-Type': 'application/json'},
   body: JSON.stringify(new_user)}
   );

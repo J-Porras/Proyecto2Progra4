@@ -62,7 +62,6 @@ public class UsuariosR {
     }
     
     @POST
-    @Path("{registrarse}")
     @Consumes(MediaType.APPLICATION_JSON) 
     public void addU(usuarios p) {  
         try {
