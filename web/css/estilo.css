@@ -13,12 +13,12 @@
 */
 body {
     /*padding-top: 20%; */
-    background: rgb(31, 31, 46);
+    background: #4D4D4D;
     display: flex;
     flex-direction: column;
 
     
-    justify-content: center;
+    /*justify-content: center;*/
     height: 100vh;
     font-family: 'Lato', sans-serif;
     margin: 0;
@@ -187,7 +187,8 @@ form h1{
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
     background-color: #ddd;
     outline: none;
-}
+}co
+
 
 .form-container .btn {
     background-color: #00ffe1;

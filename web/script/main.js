@@ -229,15 +229,12 @@ function login(){
 
 function register(){
 
-  console.log('INSIDE REGISTER')
+
 
   let new_user = {contrasenna:"-",id:"-",nombre:"-",rol:"1"};//nuevo usuario es normie
   new_user.nombre = $('#nombreregister').val();
   new_user.id = $('#idregister').val();
   new_user.contrasenna = $('#contrasenaregister').val();
-
-
-  console.log('SENDING REQUEST ' + JSON.stringify(new_user))
 
   let request = new Request(url + 'api/usuarios',
   {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -245,18 +242,18 @@ function register(){
   );
 
   (async () =>{
-    console.log('Async()');
+
 
     const response = await fetch(request);
 
     if(!response.ok){
-      console.log('error Register')
+      alert('error Register')
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
-    console.log('nice register');
     alert('Usuario registrado exitosamente')
-    //console.log(current_user)
+    
+
     //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
   })();
 

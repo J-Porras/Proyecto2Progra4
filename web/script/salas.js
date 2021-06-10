@@ -2,55 +2,59 @@
 
 function clickNuevaSala(){
     $('#crearsala').click(
+      
         function(){
-            console.log('click nueva sala')
-            newSala();
+          newSala()
         }
 
     );
 }
 
+function addSala(){ //sala a la DB
+  let nuevaSala = {id:"0",nombre:""}
+
+  nuevaSala.nombre = $('#nuevasalanombre').val()
+
+  let request = new Request(url + "api/salas",
+  { method: 'POST',headers :{'Content-Type': 'application/json'},
+    body: JSON.stringify(nuevaSala)
+  }
+  );
+
+  (async ()=>{
+    const response = await fetch(request);
+    if (!response.ok) {
+      return;
+    }
+    alert('Insertado en DB')
+  })(); 
+
+}
 
 function newSala(){
-    var nombreSala = $('#nuevasalanombre')
-    var salasForm = getSalasForm();//todas las salas
-    salasForm.forEach(
-      (element) =>{
-        if(nombreSalaValido(element,nombreSala)){
-          alert('Nueva Sala creada FALTA DEVOLVERLA')
-        }
-        else{
-          alert('Nombre de Sala no valido')
-        }
+  var nombreSala = $('#nuevasalanombre').val()
+
+
+  salas.forEach(//la variable  salas vienen de tableSalas
+    (element)=>{
+      if(nombreSalaValido(element,nombreSala)){
+        addSala()
+        console.log('Sala agregada')
+        return;
       }
-  
-    )
-  
+      else{
+        alert('Nombre de Sala no valido')
+      }
+    }
+
+  )
+
 }
-  
- 
 
   
-function getSalasForm(){//retorna las salas del ul en formato JS array
-    var salas =  $(".dropdown-item").map(function() {
-      console.log(innerHTML);
-      return this.innerHTML;
-    }).get();
-}
-  
 function nombreSalaValido(sala,nombre){
-    if(sala.text === nombre){
+    if(sala.nombre === nombre){
       return false
-  
     }
     return true  
 }
-  
-  
-
-function whenloaded(){
-    clickNuevaSala();
-}
-
-
-$(whenloaded);
