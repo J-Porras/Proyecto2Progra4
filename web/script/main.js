@@ -176,7 +176,7 @@ function clickRegister(){
 
 
 
-//envia al url de nuea Sala
+//envia al url de nueva Sala
 function clickNuevaSala(){
   
   $('#registrarSalasBtn').click(
@@ -189,8 +189,27 @@ function clickNuevaSala(){
 }
 
 
+//envia al url de nueva Pelicula
+function clickNuevaPeli(){
+  
+  $('#peliculasBtn').click(
+    function(){
+      document.location = url + "registrarPeli.html";
+    }
+  );
 
+}
 
+//envia al url de nueva Proyec
+function clickNuevaProyec(){
+  
+  $('#proyecionBtn').click(
+    function(){
+      document.location = url + "nuevaProyec.html";
+    }
+  );
+
+}
 
 //iniciar sesion
 function login(){
@@ -252,7 +271,7 @@ function register(){
       return;
     }
     alert('Usuario registrado exitosamente')
-    
+
 
     //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
   })();
@@ -286,6 +305,8 @@ function whenloaded(){
   clickLogin();
   clickRegister();
   clickNuevaSala();
+  clickNuevaPeli();
+  clickNuevaProyec();
 
   openForm();
   closeForm();
