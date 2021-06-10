@@ -69,7 +69,7 @@ function changeNavBar(){
             console.log('inside swithc')
             var salasBtn = $('<button/>',{
                 text : 'Registrar Salas',
-                id : 'salasBtn',
+                id : 'registrarSalasBtn',
         
             })
             .addClass('btn btn-primary .mx-auto')
@@ -127,6 +127,7 @@ function changeNavBar(){
       text : 'Registrarse',
       id : 'toggleRegister',
     })
+    
     .addClass('btn btn-primary .mx-auto')
     .attr('type', 'text');
     $('#navbarNavAltMarkup').append(registerBtn);

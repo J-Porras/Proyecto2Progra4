@@ -147,6 +147,7 @@ function closeFormRegister() {
 }
 
 
+//registrar
 function clickRegister(){
 
   $('#btnRegister').click(
@@ -166,6 +167,22 @@ function clickLogout(){
   location.reload();
 
 }
+
+//envia al url de nuea Sala
+function clickNuevaSala(){
+  
+  $('#registrarSalasBtn').click(
+    function(){
+      console.log('nueva sala')
+      document.location = url + "registrarSala.html";
+    }
+  );
+
+}
+
+
+
+
 
 //iniciar sesion
 function login(){
@@ -239,6 +256,41 @@ function register(){
 }
 
 
+function newSala(){
+  var nombreSala = $('#nuevasalanombre')
+  var salas = getSalasForm();//todas las salas
+  salas.forEach(
+    (element) =>{
+      if(nombreSalaValido(element,nombreSala)){
+        alert('Nueva Sala creada FALTA DEVOLVERLA')
+      }
+      else{
+        alert('Nombre de Sala no valido')
+      }
+    }
+
+  )
+
+}
+
+
+
+function getSalasForm(){//retorna las salas del ul en formato JS array
+  var salas =  $(".dropdown-item").map(function() {
+    return this.innerHTML;
+  }).get();
+}
+
+function nombreSalaValido(sala,nombre){
+  if(sala.text === nombre){
+    return false
+
+  }
+  return true  
+}
+
+
+
 
 /*el fetch and list en nuestro caso devuelve la lista de proyecciones
 para insertarlas en las salas, es lo primero que hace el browser 
@@ -264,10 +316,14 @@ function whenloaded(){
   
   clickLogin();
   clickRegister();
+  clickNuevaSala();
+
   openForm();
   closeForm();
   openFormRegister();
   closeFormRegister();
+
+  newSala();
 }
 
 $(whenloaded);
