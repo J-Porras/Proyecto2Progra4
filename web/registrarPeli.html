@@ -19,7 +19,18 @@ and open the template in the editor.
         <link rel='stylesheet' type='text/css' href='css/estilo.css'>
     </head>
     <body>
-        <div>Nueva Pelicula</div>
+        <!--FORM NUEVA SALA -->
+        <form>
+            <div class="mb-1">
+                <label for="inputNuevaPeli" class="form-label">Nombre de la Pelicula</label>
+                <input type="text" class="form-control" id="nuevapelinombre" >
+                <label for="inputNuevaPeli" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="nuevapeliprecio" >
+            </div>
+            <button type="submit" class="btn btn-primary" id="crearpeli">Crear Pelicula</button>
+        </form>
+
+        <div>Peliculas actuales</div>
 
 
 
@@ -39,6 +50,11 @@ and open the template in the editor.
         <script src='script/navbarLoader.js'></script>
 
         <script src='script/main.js'></script>
+
+        <script src='script/tablePeliculas.js'></script>
+
+        <script src='script/peliculas.js'></script>
+
 
     </body>
 </html>

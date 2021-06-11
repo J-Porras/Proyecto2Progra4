@@ -43,7 +43,8 @@ import peliculas.Logic.peliculas;
  */
 @Path("/peliculas")
 public class PeliculasR {
-     String location="C:/AAA/images/";
+    String location="C:/AAA/images/";
+    
     
     @GET
     @Path("{id}")
@@ -97,17 +98,18 @@ public class PeliculasR {
     @Consumes(MediaType.MULTIPART_FORM_DATA) 
     
     public void addImge(@PathParam("id") String id, @FormDataParam("image") InputStream imagenStream) {  
+        
         try{
-                int read = 0;
-                byte[] bytes = new byte[1024];
+            int read = 0;
+            byte[] bytes = new byte[1024];
 
-                OutputStream out = new FileOutputStream(new File(location + id));
-                while ((read = imagenStream.read(bytes)) != -1){out.write(bytes, 0, read);}
-                out.flush();
-                out.close();
-            } catch (Exception ex) {
-                throw new NotAcceptableException(); 
-            }
-  
-}
+            OutputStream out = new FileOutputStream(new File(location + id));
+            while ((read = imagenStream.read(bytes)) != -1){out.write(bytes, 0, read);}
+            out.flush();
+            out.close();
+        } catch (Exception ex) {
+            throw new NotAcceptableException(); 
+        }
+ 
+    }
 }

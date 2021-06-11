@@ -2,10 +2,6 @@ var url = "http://localhost:8080/Proyecto2Progra4/";
 var salas = new Array();
 const table = document.getElementById('tableSalas');
 
-function getAllSalas(){
-
-}
-
 
 var defaultTable = `
 
@@ -24,25 +20,19 @@ var defaultTable = `
 
 
 function getSalas(){
+
     let request = new Request(url + "api/salas",
         { method: 'GET',headers :{} }
     );
-
     (async ()=>{
+      const response = await fetch(request);
+      if (!response.ok) {
 
+        return;
+      }
 
-        const response = await fetch(request);
-        if (!response.ok) {
-
-          return;
-        }
-
-
-
-        salas = await response.json();
-        changeDropdown();
-
-
+      salas = await response.json();
+      changeDropdown();
     })();
 }
 

@@ -1,13 +1,9 @@
-
-
 function clickNuevaSala(){
-    $('#crearsala').click(
-      
-        function(){
-          newSala()
-        }
-
-    );
+  $('#crearsala').click(
+    function(){
+      newSala()
+    }
+  );
 }
 
 function addSala(){ //sala a la DB
@@ -15,7 +11,7 @@ function addSala(){ //sala a la DB
 
   nuevaSala.nombre = $('#nuevasalanombre').val()
 
-  let request = new Request(url + "api/salas",
+  let request = new Request(url + "api/salas/add",
   { method: 'POST',headers :{'Content-Type': 'application/json'},
     body: JSON.stringify(nuevaSala)
   }
@@ -26,34 +22,25 @@ function addSala(){ //sala a la DB
     if (!response.ok) {
       return;
     }
-    alert('Insertado en DB')
   })(); 
 
 }
 
 function newSala(){
   var nombreSala = $('#nuevasalanombre').val()
-
-
-  salas.forEach(//la variable  salas vienen de tableSalas
-    (element)=>{
-      if(nombreSalaValido(element,nombreSala)){
-        addSala()
-        console.log('Sala agregada')
-        return;
-      }
-      else{
-        alert('Nombre de Sala no valido')
-      }
-    }
-
-  )
+  //.every() checkea si todos los objetos de un array cumplen una condicion
+  let isValid = salas.every(nombreSalaValido)
+  if(isValid){
+    addSala();
+  }
 
 }
 
   
-function nombreSalaValido(sala,nombre){
-    if(sala.nombre === nombre){
+function nombreSalaValido(element){
+    if(!element.nombre)
+      return false
+    if(element.nombre === $('#nuevasalanombre').val()){
       return false
     }
     return true  

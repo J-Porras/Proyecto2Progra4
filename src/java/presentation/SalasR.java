@@ -47,6 +47,7 @@ public class SalasR {
     
     
     @POST
+    @Path("{add}")
     @Consumes(MediaType.APPLICATION_JSON) 
     public void addU(sala p) {  
         try {

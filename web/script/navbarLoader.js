@@ -25,12 +25,6 @@ var defaultNavBar =
 
 function changeNavBar(){
   const navbar = document.getElementById('navbarNavAltMarkup');
-
-  
-
-  
-
-
   //creando boton de logout
   if(localStorage.getItem('usuario_actual')){//si hay usuario
 
