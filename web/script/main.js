@@ -136,8 +136,7 @@ function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
   alert('Sesion cerrada')
-  location.reload();
-
+  document.location = url;
 }
 
 

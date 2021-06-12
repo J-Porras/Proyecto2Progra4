@@ -34,11 +34,11 @@ DROP TABLE IF EXISTS `proyecciones`;
 CREATE TABLE `proyecciones` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sala_id` int  NOT NULL ,
-   `fecha` varchar(50) NOT NULL ,
-    `hora` varchar(50) NOT NULL ,
+  `fecha` varchar(50) NOT NULL ,
+  `hora` varchar(50) NOT NULL ,
   `pelicula_id` int,
-   CONSTRAINT `sala_fk` FOREIGN KEY (`sala_id`) REFERENCES `peliculas` (`id`),
-   CONSTRAINT `pelicula_fk` FOREIGN KEY (`pelicula_id`) REFERENCES `salas` (`id`),
+  CONSTRAINT `sala_fk` FOREIGN KEY (`sala_id`) REFERENCES `peliculas` (`id`),
+  CONSTRAINT `pelicula_fk` FOREIGN KEY (`pelicula_id`) REFERENCES `salas` (`id`),
   PRIMARY KEY (`id`,`pelicula_id`, `fecha`, `hora`, `sala_id`)
 );
 

@@ -50,9 +50,9 @@ public class UsuariosR {
     @Produces({MediaType.APPLICATION_JSON})
     public usuarios login (usuarios u) {
         try {
-            System.out.println("Inside LOGIN API");
-
-            usuarios new_user = Service.instance().readbyidU(u.getId());
+            System.out.println("Inside LOGIN API"); 
+            System.out.println("CONTRA: " + u.getContrasenna()); 
+            usuarios new_user = Service.instance().login(u);
             new_user.cleanPassword();
             return new_user;
             

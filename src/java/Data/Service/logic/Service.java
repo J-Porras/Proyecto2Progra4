@@ -91,7 +91,9 @@ public class Service {
     public usuarios readbyidU(String id) throws Exception{
         return usuariosDAO.readbyId(id);
     }
-     public tiqueteComprado readbyidTc(int id) throws Exception{
+    
+    
+    public tiqueteComprado readbyidTc(int id) throws Exception{
         return this.tiquetescompradosDao.readbyId(id);
     }
     ///////////////////Peliculas

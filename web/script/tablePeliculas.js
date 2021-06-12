@@ -47,7 +47,7 @@ function changeTable(){
 
 function newRow(element){
     var row = $('#tablePeliculas > tbody:last-child')
-  .append('<tr class="table-secondary .d-sm-flex">'+
+    .append('<tr class="table-secondary .d-sm-flex">'+
     '<th scope="row">'+element.id+'</th>'+
     '<td >'+element.nombre+'</td>'+
     '<td >'+element.precio+'</td>'+
@@ -57,8 +57,8 @@ function newRow(element){
 
 
 function whenloaded(){
-    $('body').append(defaultTablePeliculas); 
-    getPeliculas();
+  $('body').append(defaultTablePeliculas); 
+  getPeliculas();
 }
 
 $(whenloaded)
