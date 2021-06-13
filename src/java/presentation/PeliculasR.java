@@ -43,7 +43,7 @@ import peliculas.Logic.peliculas;
  */
 @Path("/peliculas")
 public class PeliculasR {
-    String location="C:/AAA/images/";
+    String location="C:/images/";
     
     
     @GET

@@ -26,7 +26,7 @@ import tiquetesComprados.Logic.tiqueteComprado;
  */
 @Path("/tiquetescComprados")
 public class TiquetesCompradosR {
-     String location="C:/AAA/images/";
+     String location="C:/images/";
     
     @GET
     @Path("{id}")

@@ -26,7 +26,7 @@ import usuarios.Logic.usuarios;
  */
 @Path("/usuarios")
 public class UsuariosR {
-    String location="C:/AAA/images/";
+    String location="C:/images/";
     
     @GET
     @Path("{cedula}")

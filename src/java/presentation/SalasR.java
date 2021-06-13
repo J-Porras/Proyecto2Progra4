@@ -27,7 +27,7 @@ import salas.Logic.sala;
  */
 @Path("/salas")
 public class SalasR {
-         String location="C:/AAA/images/";
+         String location="C:/images/";
     
     @GET
     @Path("{id}")
