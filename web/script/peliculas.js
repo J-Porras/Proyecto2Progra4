@@ -4,8 +4,9 @@ function clickNuevaPelicula(){
 
     $('#crearpeli').click(
         function(){
-            console.log('nuevo achis')
-        }
+            console.log('???')
+            newPelicula()
+        }   
     );
 
 }
@@ -18,7 +19,10 @@ function newPelicula(){
     nuevaPelicula.nombre = $('#nuevapelinombre').val()
     nuevaPelicula.precio = $('#nuevapeliprecio').val()
 
-    let request = new Request(url + "api/proyecciones",
+
+    console.log('Enviando request a peliculas')
+
+    let request = new Request(url + "api/peliculas",
     { method: 'POST',headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(nuevaPelicula)
     }
