@@ -8,22 +8,28 @@ var selectedSala;
 
 
 var dropdownHora = `
-<select class="form-select" id="dropdownHoras" aria-label="size 4 select example">
+<select class="form-select mt-2" id="dropdownHoras" aria-label="size 4 select example">
   <option selected>Seleccionar Hora inicial</option>
 </select>`
 ;
 
 var dropdownPeliculas = `
-<select class="form-select" id="dropdownPeliculas" aria-label="size 4 select example">
+<select class="form-select mt-2" id="dropdownPeliculas" aria-label="size 4 select example">
   <option selected>Seleccionar Pelicula</option>
 </select>`
 ;
 
 var dropdownSalas = `
-<select class="form-select" id="dropdownSalas"  aria-label="size 4 select example">
+<select class="form-select mt-2" id="dropdownSalas"  aria-label="size 4 select example">
   <option selected>Seleccionar Sala</option>
 </select>`
 ;
+
+
+var calendario = `
+  <p class="mt-2">Fecha de la Proyeccion: <input type="text" id="datepicker"></p>
+
+`;
 
 
 
@@ -136,16 +142,30 @@ function getInputHorario(){
   });
 }
 
-
+function getInputFecha(){
+  $("#datepicker").change(function(){
+    var selected = $(this).val();
+    selected.toString()
+    $('#fechaplaceholder').focus().val(selected)
+  });
+}
 
 
 
 function render(){
-  $('#inputsProyecContainer').append(dropdownPeliculas)
+  $('#fromProyecContainer').append(dropdownPeliculas)
 
-  $('#inputsProyecContainer').append(dropdownSalas)
-  $('#inputsProyecContainer').append(dropdownHora)
+  $('#fromProyecContainer').append(dropdownSalas)
+  $('#fromProyecContainer').append(dropdownHora)
+  $('#fromProyecContainer').append(calendario)
 
+
+}
+
+function renderCalendar(){
+  $(function(){
+    $("#datepicker").datepicker();
+  });
 }
 
 function whenloaded(){
@@ -157,6 +177,9 @@ function whenloaded(){
   getInputSala()
   getInputPelicula()
   getInputHorario()
+  getInputFecha()
+  renderCalendar();
+  
 }
 
 

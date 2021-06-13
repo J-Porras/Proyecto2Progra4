@@ -97,6 +97,8 @@ if(current_title === 'Cinema24+1'){
 }//fin if
 
 
+/////////////////////////////////////
+
 //Formulario de Login
 function openForm() {
   //document.getElementById("myForm").style.display = "block";

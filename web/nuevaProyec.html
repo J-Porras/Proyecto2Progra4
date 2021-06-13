@@ -16,12 +16,14 @@ and open the template in the editor.
         <!-- CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <link rel='stylesheet' type='text/css' href='css/estilo.css'>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
       </head>
       <body>
 
       
 
-        <div  class="mx-auto mt-10 col-md-12" style="width: 500px;">
+        <div  class="mx-auto mt-3 col-md-12" style="width: 500px;">
 
           <h5>Nueva proyeccion</h6>
 
@@ -31,13 +33,19 @@ and open the template in the editor.
           <input class="form-control" id="salaplaceholder" type="text" placeholder="Sala..." aria-label="readonly input example" readonly>
           <h6>Horario</h6>
           <input class="form-control" id="horaplaceholder" type="text" placeholder="Horario..." aria-label="readonly input example" readonly>
+          <h6>Dia</h6>
+          <input class="form-control" id="fechaplaceholder" type="text" placeholder="Fecha..." aria-label="readonly input example" readonly>
+          <button type="submit" class="btn btn-primary" id="crearProyec">Crear Proyecciones</button>
+
         </div>
 
 
 
         <div class="mx-auto mt-4 " style="width: 500px;"  id="inputsProyecContainer">
           <h5>Seleccione el Horario, Pelicula y Sala </h6>
+            <form id="fromProyecContainer">
 
+            </form>
 
         </div>
 
@@ -45,7 +53,7 @@ and open the template in the editor.
 
         <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <!--Nuestros scripts-->
         <script src='script/navbarLoader.js'></script>
