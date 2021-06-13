@@ -5,7 +5,7 @@ const table = document.getElementById('tableSalas');
 
 var defaultTable = `
 
-<table class="mx-auto table align-middle" id="tableSalas">
+<table class="table mx-auto mt-3 col-md-12 " id="tableSalas"  style="width: 500px;">
   <thead>
     <tr class="table-secondary mx-auto">
       <th scope="col">ID</th>
@@ -32,13 +32,13 @@ function getSalas(){
       }
 
       salas = await response.json();
-      changeDropdown();
+      changeTable();
     })();
 }
 
 
-
-function changeDropdown(){
+//actualiza la tabla
+function changeTable(){
   salas.forEach(
     (index)=>{
       newRow(index);
@@ -51,9 +51,10 @@ function changeDropdown(){
 function newRow(element){
   var row = $('#tableSalas > tbody:last-child')
   .append('<tr class="table-secondary .d-sm-flex">'+
-    '<th scope="row">'+element.id+'</th>'+
-    '<td >'+element.nombre+'</td>'
-    +'</tr>')
+      '<th scope="row">'+element.id+'</th>'+
+      '<td >'+element.nombre+'</td>'
+      +'</tr>'
+  )
   $('#tableSalasbody').append(row)
 }
 

@@ -4,7 +4,6 @@ function clickNuevaPelicula(){
 
     $('#crearpeli').click(
         function(){
-            console.log('???')
             newPelicula()
         }   
     );

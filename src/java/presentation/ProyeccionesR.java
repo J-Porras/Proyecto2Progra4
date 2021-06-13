@@ -49,7 +49,7 @@ public class ProyeccionesR {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON) 
-    public void addU(proyeccion p) {  
+    public void addProyeccion(proyeccion p) {  
         try {
             Service.instance().crearProyecion(p);
         } catch (Exception ex) {

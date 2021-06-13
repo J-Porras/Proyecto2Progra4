@@ -20,17 +20,19 @@ and open the template in the editor.
     </head>
     <body>
         <!--FORM NUEVA PELICULA-->
-        <form>
-            <div class="mb-1">
-                <label for="inputNuevaPeli" class="form-label">Nombre de la Pelicula</label>
-                <input type="text" class="form-control" id="nuevapelinombre" >
-                <label for="inputNuevaPeli" class="form-label">Precio</label>
-                <input type="text" class="form-control" id="nuevapeliprecio" >
+        
+            <div class="mx-auto mt-3 col-md-12" style="width: 500px;">
+                <form>
+                    <label for="inputNuevaPeli" class="form-label">Nombre de la Pelicula</label>
+                    <input type="text" class="form-control" id="nuevapelinombre" >
+                    <label for="inputNuevaPeli" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="nuevapeliprecio" >
+                    <button type="submit" class="btn btn-primary " id="crearpeli">Crear Pelicula</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary" id="crearpeli">Crear Pelicula</button>
-        </form>
+            
 
-        <div>Peliculas actuales
+        <div id="tablePeliculasContainer" class="mx-auto mt-4" style="width: 500px;"">Peliculas actuales
             <!--Se llena con JS-->
         </div>
 

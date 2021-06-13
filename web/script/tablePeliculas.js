@@ -2,7 +2,7 @@ var peliculas_ = new Array();
 
 
 var defaultTablePeliculas = `
-<table class="mx-auto table align-middle" id="tablePeliculas">
+<table class="text-center mx-auto table align-middle" id="tablePeliculas">
   <thead>
     <tr class="table-secondary mx-auto">
       <th scope="col">ID</th>
@@ -57,7 +57,7 @@ function newRow(element){
 
 
 function whenloaded(){
-  $('body').append(defaultTablePeliculas); 
+  $('#tablePeliculasContainer').append(defaultTablePeliculas); 
   getPeliculas();
 }
 

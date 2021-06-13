@@ -7,7 +7,7 @@ package proyecciones.Logic;
 
 /**
  *
- * @author pg300
+ * @author pg300    
  */
 public class proyeccion {
    private int id;

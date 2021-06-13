@@ -1,10 +1,12 @@
-var actualPeliculas = new Array()
+ actualPeliculas = new Array()
 var actualSalas = new Array()
-
+var proyeccionesArray = new Array();
+var actualProyecciones = new Array();
 
 var selectedPeli;
 var selectedHora;
 var selectedSala;
+var selectedFecha;
 
 
 var dropdownHora = `
@@ -31,6 +33,21 @@ var calendario = `
 
 `;
 
+
+var tableProyecciones = `
+<table class="mx-auto table align-middle" id="tableProyecciones">
+  <thead>
+    <tr class="table-secondary mx-auto">
+      <th scope="col">Sala</th>
+      <th scope="col">Pelicula</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Hora</th>
+    </tr>
+  </thead>
+    <tbody id="tableProyeccionesbody">
+  </tbody>
+</table>
+`;
 
 
 function loadHoras(){
@@ -63,24 +80,6 @@ function getPeliculasDropdown(){ //from DB
     })();
 }
 
-
-
-
-function loadPeliculas(){
-  var peliculaOption;
-  
-  actualPeliculas.forEach(
-    (index)=>{
-      peliculaOption = $('<option/>',{
-        text : index.nombre,
-        id: index.id,
-
-      })
-      $('#dropdownPeliculas').append(peliculaOption)
-    }
-  );
-}
-
 function getSalasDropdown(){
 
   let request = new Request(url + "api/salas",
@@ -97,6 +96,37 @@ function getSalasDropdown(){
     loadSalas();
   })();
 }
+
+function getProyecciones(){
+  let request = new Request(url + "api/proyecciones",
+      { method: 'GET',headers :{} }
+  );
+  (async ()=>{
+    const response = await fetch(request);
+    if (!response.ok) {
+
+      return;
+    }
+    actualProyecciones = await response.json();
+    loadTableProyecc();
+  })();
+}
+
+function loadPeliculas(){
+  var peliculaOption;
+  
+  actualPeliculas.forEach(
+    (index)=>{
+      peliculaOption = $('<option/>',{
+        text : index.nombre,
+        id: index.id,
+
+      })
+      $('#dropdownPeliculas').append(peliculaOption)
+    }
+  );
+}
+
 
 
 
@@ -116,41 +146,70 @@ function loadSalas(){
 }
 
 function getInputSala(){
-  let currentoption
   $("#dropdownSalas").change(function () {
-    currentoption  = $(this).children(':selected');
+    selectedSala  = $(this).children(':selected');
 
-    $('#salaplaceholder').focus().val(currentoption.val())
+    $('#salaplaceholder').focus().val(selectedSala.val())
   });
 }
 
 function getInputPelicula(){
-  let currentoption
   $("#dropdownPeliculas").change(function () {
-    currentoption  = $(this).children(':selected');
+    selectedPeli  = $(this).children(':selected');
 
-    $('#peliplaceholder').focus().val(currentoption.val())
+    $('#peliplaceholder').focus().val(selectedPeli.val())
   });
 }
 
 function getInputHorario(){
-  let currentoption
   $("#dropdownHoras").change(function () {
-    currentoption  = $(this).children(':selected');
+    selectedHora  = $(this).children(':selected');
 
-    $('#horaplaceholder').focus().val(currentoption.val())
+    $('#horaplaceholder').focus().val(selectedHora.val())
   });
 }
 
 function getInputFecha(){
   $("#datepicker").change(function(){
-    var selected = $(this).val();
-    selected.toString()
-    $('#fechaplaceholder').focus().val(selected)
+    selectedFecha = $(this).val();
+    selectedFecha= selectedFecha.toString()
+    $('#fechaplaceholder').focus().val(selectedFecha)
   });
 }
 
 
+function loadTableProyecc(){
+  actualProyecciones.forEach(
+    (index)=>{
+      newRowTableProyec(index);
+    }
+  );
+}
+
+
+function newRowTableProyec(element){
+  let row = $('#tableProyecciones > tbody:last-child')
+  .append(
+    '<tr class="table-secondary .d-sm-flex">'+
+      '<th scope="row">'+element.sala_id+'</th>'+
+      '<td >'+getNamePelibyId(element.id)+'</td>'+
+      '<td >'+element.fecha+'</td>'+
+      '<td >'+element.hora+'</td>'+
+    +'</tr>'
+  )
+  $('#tableSalasbody').append(row)
+}
+
+
+function getNamePelibyId(idmovie){ 
+  let nombrePeli = actualPeliculas.find(
+    
+    element => element.id === idmovie
+  )
+  return nombrePeli.nombre;
+
+
+}
 
 function render(){
   $('#fromProyecContainer').append(dropdownPeliculas)
@@ -158,7 +217,7 @@ function render(){
   $('#fromProyecContainer').append(dropdownSalas)
   $('#fromProyecContainer').append(dropdownHora)
   $('#fromProyecContainer').append(calendario)
-
+  $('#tableProyecContainer').append(tableProyecciones)
 
 }
 
@@ -179,7 +238,7 @@ function whenloaded(){
   getInputHorario()
   getInputFecha()
   renderCalendar();
-  
+  getProyecciones();
 }
 
 
