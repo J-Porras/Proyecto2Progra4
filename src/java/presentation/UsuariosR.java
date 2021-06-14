@@ -13,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.NotAcceptableException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -76,6 +77,16 @@ public class UsuariosR {
             System.out.println("RIP ADD");
 
             throw new NotAcceptableException(); 
+        }
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void update(usuarios p) {  
+        try {
+            
+        } catch (Exception ex) {
+            throw new NotFoundException(); 
         }
     }
     

@@ -257,6 +257,7 @@ function login(){
 
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));
     console.log(current_user)
+    location.reload()
 
     //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
   })();
@@ -325,7 +326,7 @@ function whenloaded(){
   clickNuevaPeli();
   clickNuevaProyec();
   clickTiquetes()
-  
+
   openForm();
   closeForm();
   openFormRegister();
