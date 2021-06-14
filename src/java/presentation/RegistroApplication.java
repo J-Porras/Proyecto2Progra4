@@ -19,6 +19,7 @@ public class RegistroApplication extends Application{
         classes.add(UsuariosR.class);
         classes.add(TiquetesCompradosR.class);
         classes.add(ProyeccionesR.class);
+        classes.add(MisTiquetesR.class);
         return classes;
     }   
 }

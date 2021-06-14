@@ -28,23 +28,19 @@ import tiquetesComprados.Logic.tiqueteComprado;
 public class TiquetesCompradosR {
      String location="C:/images/";
     
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public tiqueteComprado get(@PathParam("id") int id) {
-        try {
-            return Service.instance().readbyidTc(id);
-        } catch (Exception ex) {
-            throw new NotFoundException(); 
-        }
-    }
+
+  
+    
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<tiqueteComprado> search(@DefaultValue("") @QueryParam("id_cliente") String id_cliente) throws Exception { 
-       
-        return Service.instance().tiqueteCompradoSearchCliente(id_cliente);
+    public List<tiqueteComprado> search(@DefaultValue("0") @QueryParam("id_proyecciones") String id_proyecciones) throws Exception { 
+        int id= Integer.parseInt(id_proyecciones);
+        return Service.instance().AsientosOcupados(id);
     } 
-    public List<tiqueteComprado> searchOcupados(@DefaultValue("0") @QueryParam("id_proyecciones") String id_proyecciones) throws Exception { 
+    @GET
+    @Path("{id_proyecciones}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<tiqueteComprado> searchOcupados(@DefaultValue("0") @PathParam("id_proyecciones") String id_proyecciones) throws Exception { 
         int id= Integer.parseInt(id_proyecciones);
         return Service.instance().AsientosOcupados(id);
     } 

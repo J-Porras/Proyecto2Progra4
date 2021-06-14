@@ -80,6 +80,7 @@ public class UsuariosR {
         }
     }
     
+    
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(usuarios p) {  
