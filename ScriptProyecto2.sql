@@ -76,5 +76,5 @@ insert into salas (nombre) values( 'Sala 1');
 select * from salas;
 insert into proyecciones (sala_id,fecha,hora,pelicula_id) values( 1,'10/10/2021','2:00',1);
 select * from proyecciones;
-insert into tiquetesComprados (id_proyeccion,id_cliente,asiento) values( 1,'1234','A4');
+insert into tiquetesComprados (id_proyeccion,id_cliente,asiento) values( 1,'4321','A4');
 select * from tiquetesComprados;
