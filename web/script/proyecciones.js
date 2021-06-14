@@ -1,15 +1,16 @@
 var nuevaProyeccion ={
-    id:"-1",
-    salaid:"-1",
     fecha:"",
-    hora:"",
-    pelicula_id:"-1",
+    hora:"",    
+    id:"0",
+    pelicula_id:"0",
+    sala_id:"0",
 }
 
 function clickNuevaProyeccion(){
-    $('#crearpeli').click(
+    $('#crearProyec').click(
         function(){
-            new newProyeccion()
+            newProyeccion()
+            location.reload();
         }
     );
 }
@@ -17,31 +18,30 @@ function clickNuevaProyeccion(){
 
 function newProyeccion(){
     nuevaProyeccion.pelicula_id = actualPeliculas.find(
-        element => element.nombre = selectedPeli.val()
+        element => element.nombre == selectedPeli.val()
     ).id
 
     nuevaProyeccion.fecha = selectedFecha;
-    nuevaProyeccion.hora = selectedHora;
-    nuevaProyeccion.salaid = actualSalas.find(
-        element => element.nombre = selectedSala.val()
+    nuevaProyeccion.hora = selectedHora.val();
+    nuevaProyeccion.sala_id = actualSalas.find(
+        element => element.nombre == selectedSala.val()
     ).id
+
 
     console.log('Enviando request nueva proyeccio')
 
     let request = new Request(url + "api/proyecciones",
     { method: 'POST',headers :{'Content-Type': 'application/json'},
-        body: JSON.stringify(nuevaPelicula)
+        body: JSON.stringify(nuevaProyeccion)
     }
     );
 
     (async ()=>{
         const response = await fetch(request);
         if (!response.ok) {
-        return;
+            return;
         }
     })(); 
-
-
 
 
 }
@@ -54,4 +54,4 @@ function whenloaded(){
     clickNuevaProyeccion()
 }
 
-$(clickNuevaProyeccion)    
+$(whenloaded)    

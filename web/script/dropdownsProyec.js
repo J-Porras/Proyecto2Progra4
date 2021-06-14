@@ -108,6 +108,7 @@ function getProyecciones(){
       return;
     }
     actualProyecciones = await response.json();
+    console.log(actualProyecciones)
     loadTableProyecc();
   })();
 }
@@ -184,6 +185,7 @@ function loadTableProyecc(){
       newRowTableProyec(index);
     }
   );
+  getNameSalabyId()
 }
 
 
@@ -191,8 +193,8 @@ function newRowTableProyec(element){
   let row = $('#tableProyecciones > tbody:last-child')
   .append(
     '<tr class="table-secondary .d-sm-flex">'+
-      '<th scope="row">'+element.sala_id+'</th>'+
-      '<td >'+getNamePelibyId(element.id)+'</td>'+
+      '<th scope="row">'+getNameSalabyId(element.sala_id)+'</th>'+
+      '<td >'+getNamePelibyId(element.pelicula_id)+'</td>'+
       '<td >'+element.fecha+'</td>'+
       '<td >'+element.hora+'</td>'+
     +'</tr>'
@@ -202,14 +204,28 @@ function newRowTableProyec(element){
 
 
 function getNamePelibyId(idmovie){ 
-  let nombrePeli = actualPeliculas.find(
-    
-    element => element.id === idmovie
-  )
-  return nombrePeli.nombre;
-
+  let foundPeli ;
+  for (let i = 0;i<actualPeliculas.length;i++){
+    if (actualPeliculas[i].id == idmovie){
+      foundPeli = actualPeliculas[i]
+      return foundPeli.nombre;
+    }
+  }
+  return "---"
 
 }
+
+function getNameSalabyId(idsala){
+  let foundSala = actualSalas.find(
+    element => element.id == idsala
+  )
+  if(foundSala){
+    return foundSala.nombre
+  }
+  return "---"
+
+}
+
 
 function render(){
   $('#fromProyecContainer').append(dropdownPeliculas)

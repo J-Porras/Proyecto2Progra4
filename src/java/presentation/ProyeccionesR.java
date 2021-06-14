@@ -25,7 +25,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
  *
  * @author pg300
  */
-@Path("/proyecciones")
+    @Path("/proyecciones")
 public class ProyeccionesR {
      String location="C:/images/";
     

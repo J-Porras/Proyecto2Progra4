@@ -39,7 +39,7 @@ CREATE TABLE `proyecciones` (
   `pelicula_id` int,
   CONSTRAINT `sala_fk` FOREIGN KEY (`sala_id`) REFERENCES `peliculas` (`id`),
   CONSTRAINT `pelicula_fk` FOREIGN KEY (`pelicula_id`) REFERENCES `salas` (`id`),
-  PRIMARY KEY (`id`,`pelicula_id`, `fecha`, `hora`, `sala_id`)
+  PRIMARY KEY (`id`)
 );
 
 DROP TABLE IF EXISTS `usuarios`;
