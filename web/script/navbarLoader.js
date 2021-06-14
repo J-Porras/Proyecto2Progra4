@@ -95,6 +95,15 @@ function changeNavBar(){
         break;
 
         case 1://normies
+            var MispeliculasBtn = $('<button/>',{
+                text : 'Mis Tiquetes',
+                id : 'MispeliculasBtn',
+        
+            })
+            .addClass('btn btn-primary .mx-auto')
+            .attr('type', 'text');
+            
+            $('#navbarNavAltMarkup').append(MispeliculasBtn);
 
 
         break;
