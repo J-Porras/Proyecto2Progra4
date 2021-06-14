@@ -212,6 +212,16 @@ function clickNuevaProyec(){
 
 }
 
+function clickTiquetes(){
+  
+  $('#MispeliculasBtn').click(
+    function(){
+      document.location = url + "misTiquetes.html";
+    }
+  );
+
+}
+
 //iniciar sesion
 function login(){
 
@@ -314,7 +324,8 @@ function whenloaded(){
   clickNuevaSala();
   clickNuevaPeli();
   clickNuevaProyec();
-
+  clickTiquetes()
+  
   openForm();
   closeForm();
   openFormRegister();
