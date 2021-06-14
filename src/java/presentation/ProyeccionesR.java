@@ -34,6 +34,7 @@ public class ProyeccionesR {
     @Produces({MediaType.APPLICATION_JSON})
     public proyeccion get(@PathParam("id") int id) {
         try {
+            
             return Service.instance().readbyidPr(id);
         } catch (Exception ex) {
             throw new NotFoundException(); 
