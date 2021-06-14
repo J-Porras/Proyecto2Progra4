@@ -54,6 +54,8 @@ public class UsuariosR {
             System.out.println("CONTRA: " + u.getContrasenna()); 
             usuarios new_user = Service.instance().login(u);
             new_user.cleanPassword();
+            System.out.println("GOOD USER: " + u.getNombre()); 
+
             return new_user;
             
         } catch (Exception ex) {

@@ -8,6 +8,8 @@ var defaultTablePeliculas = `
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
+      <th scope="col">En Proyeccion</th>
+
     </tr>
   </thead>
     <tbody id="tablePeliculasbody">
@@ -51,10 +53,24 @@ function newRow(element){
     '<th scope="row">'+element.id+'</th>'+
     '<td >'+element.nombre+'</td>'+
     '<td >'+element.precio+'</td>'+
+    '<td >'+estaEnCartelera(element)+'</td>'+
+
     '</tr>')
   $('#tablePeliculasbody').append(row)
 }
 
+function estaEnCartelera(themovie){
+  let checkbox ="--"
+  if(themovie.cartelera){
+    checkbox =  '<input class="form-check-input" disabled="disabled" type="checkbox" value="" checked>'
+  }
+  else{
+    checkbox =  '<input class="form-check-input" disabled="disabled" type="checkbox" value="">'
+
+  }
+  return checkbox
+
+}
 
 function whenloaded(){
   $('#tablePeliculasContainer').append(defaultTablePeliculas); 

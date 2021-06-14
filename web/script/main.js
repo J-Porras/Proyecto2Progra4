@@ -14,7 +14,7 @@ const peliculas = document.getElementById('movies');
 
 var current_title = $(document).attr('title');
 
-if(current_title === 'Cinema24+1'){
+if(current_title == 'Cinema24+1'){
   // Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
   i = 0;
   while(i<10){
@@ -128,6 +128,8 @@ function clickLogin(){
 
   $('#btnLogin').click(
     function(){
+      console.log('click login')
+
       login();
     }
   );
@@ -137,7 +139,6 @@ function clickLogin(){
 function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
-  alert('Sesion cerrada')
   document.location = url;
 }
 
@@ -148,7 +149,6 @@ function openFormRegister() {
   $('#toggleRegister').click(
     
     function(){
-      console.log('Modal Register')
       $('#FormRegister').show();
     }
 
@@ -219,7 +219,7 @@ function login(){
   current_user.id =  $('#idlogin').val();
   current_user.contrasenna = $('#contrasena').val();
 
-  console.log(current_user)
+  console.log('Usuario a mandar '+current_user)
 
   let request = new Request(url + "api/usuarios/login",
     {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -228,24 +228,30 @@ function login(){
 
 
 
+
   (async () =>{
 
 
     const response = await fetch(request);
+    console.log('Response:'+response)
 
     if(!response.ok){
+      console.log('Bad response')
 
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
     current_user = await response.json();
 
-    console.log(current_user);
-    //console.log(current_user)
+    console.log('Good response')
+
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));
+    console.log(current_user)
+
     //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
   })();
 }
+
 
 function register(){
 

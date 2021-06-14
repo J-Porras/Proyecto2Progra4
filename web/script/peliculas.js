@@ -13,13 +13,17 @@ function clickNuevaPelicula(){
 
 
 function newPelicula(){
-    let nuevaPelicula = {id:"0",nombre:"",precio:"",cartelera:"TRUE"}
+    let nuevaPelicula = {id:"0",nombre:"",precio:"",cartelera:"FALSE"}
 
     nuevaPelicula.nombre = $('#nuevapelinombre').val()
     nuevaPelicula.precio = $('#nuevapeliprecio').val()
+    if ($('#check_id').is(":checked"))
+    {
+        nuevaPelicula.cartelera = "TRUE"
+    }
 
 
-    console.log('Enviando request a peliculas')
+   
 
     let request = new Request(url + "api/peliculas",
     { method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -30,7 +34,7 @@ function newPelicula(){
     (async ()=>{
         const response = await fetch(request);
         if (!response.ok) {
-        return;
+            return;
         }
     })(); 
 
