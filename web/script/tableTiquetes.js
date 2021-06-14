@@ -11,7 +11,7 @@ var tableTiquetesDefault = `
       <th scope="col">Cliente</th>
       <th scope="col">Asiento</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Hora</th>
+      <th scope="col"> Hora(24h) </th>
 
     </tr>
   </thead>
@@ -98,6 +98,8 @@ function newRowTable(element){
         '<td >'+getNamePelibyId(element.id_proyeccion)+'</td>' +
         '<td >'+element.id_cliente +'</td>' +
         '<td >'+element.asiento +'</td>' + 
+        '<td >'+getProyecbyId(element.id_proyeccion).fecha +'</td>' + 
+        '<td >'+getProyecbyId(element.id_proyeccion).hora +'</td>' + 
         '</tr>'
     )
   $('#tableSalasbody').append(row)
