@@ -215,6 +215,8 @@ form h1{
 .form-container img:hover{
     transform: scale(1.5);
 }
+
+
 /*Sección de las peliculas*/
 .movies{
     width: 100%;

@@ -17,12 +17,16 @@ var current_title = $(document).attr('title');
 if(current_title == 'Cinema24+1'){
   // Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
   i = 0;
-  while(i<10){
+  while(i<2){
     var div = document.createElement("div");
+
     div.classList.add("mov-container");
+
     var img = document. createElement("img");
     img.classList.add('poster');
+
     img.setAttribute('src','images/pelicula.jpg');
+    
     var descripcion = document.createElement("div");
     descripcion.appendChild(document.createTextNode("afdsfasfadsfasdfasdfaiiadsbfijadsbifbasdijfiajsdbfjiabsdiufbasuidfb iufbadsiubfiuasdbfiusadbfuisdb sssssssskdsa nfldsknfosadknfoadsnfoikasdnfonasdokfa sd faidsnf óa{s kjfokasfosifoisdnfoiasdsssssssfasdfasdfasdfasdfasdfasdfDescripcion: "+ i));
     descripcion.classList.add('descripcion');
