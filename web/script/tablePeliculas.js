@@ -9,6 +9,7 @@ var defaultTablePeliculas = `
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
       <th scope="col">En Proyeccion</th>
+      <th scope="col">Ilustracion</th>
 
     </tr>
   </thead>
@@ -54,6 +55,7 @@ function newRow(element){
     '<td >'+element.nombre+'</td>'+
     '<td >'+element.precio+'</td>'+
     '<td >'+estaEnCartelera(element)+'</td>'+
+    "<td><img src='"+url+"api/peliculas/"+element.id+"/imagen' class='icon_large img-thumbnail img-responsive w-60 p-3' ></td>"+                
 
     '</tr>')
   $('#tablePeliculasbody').append(row)

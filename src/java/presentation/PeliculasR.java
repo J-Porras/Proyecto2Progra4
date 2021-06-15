@@ -85,7 +85,7 @@ public class PeliculasR {
     }
     
     @GET
-    @Path("{id}/image")
+    @Path("{id}/imagen")
     @Produces("image/png")
     public Response getImge(@PathParam("id") String id) throws IOException {
         File file = new File(location+id);
@@ -94,10 +94,9 @@ public class PeliculasR {
     }   
     
     @POST
-    @Path("{id}/image")
+    @Path("{id}/imagen")
     @Consumes(MediaType.MULTIPART_FORM_DATA) 
-    
-    public void addImge(@PathParam("id") String id, @FormDataParam("image") InputStream imagenStream) {  
+    public void addImge(@PathParam("id") String id, @FormDataParam("imagen") InputStream imagenStream) {  
         
         try{
             int read = 0;

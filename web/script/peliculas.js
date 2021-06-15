@@ -1,4 +1,4 @@
-
+var nuevaPelicula = {id:"0",nombre:"",precio:"",cartelera:"0"}
 
 function clickNuevaPelicula(){
 
@@ -13,13 +13,12 @@ function clickNuevaPelicula(){
 
 
 function newPelicula(){
-    let nuevaPelicula = {id:"0",nombre:"",precio:"",cartelera:"FALSE"}
 
     nuevaPelicula.nombre = $('#nuevapelinombre').val()
     nuevaPelicula.precio = $('#nuevapeliprecio').val()
-    if ($('#check_id').is(":checked"))
+    if ($('#estaCartelera').is(":checked"))
     {
-        nuevaPelicula.cartelera = "TRUE"
+        nuevaPelicula.cartelera = "1"
     }
 
 
@@ -37,8 +36,27 @@ function newPelicula(){
             return;
         }
     })(); 
-
+    addImagen();
 }
+
+function addImagen(){
+    
+
+    var imagenData = new FormData();
+    imagenData.append("id", (peliculas_.length+1));
+    imagenData.append("imagen", $("#imagen").get(0).files[0]); 
+    
+    let request = new Request(url+'api/peliculas/'+(peliculas_.length+1)+"/imagen",
+    {method: 'POST',body: imagenData});
+
+    (async ()=>{
+        const response = await fetch(request);
+        if (!response.ok){
+            return;
+        }              
+    })();    
+}
+
 
 function whenloaded(){
     clickNuevaPelicula();
