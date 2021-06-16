@@ -68,10 +68,8 @@ public class UsuariosR {
     @Consumes(MediaType.APPLICATION_JSON) 
     public void addU(usuarios p) {  
         try {
-            System.out.println("INSIDE REGISTER API");
             
             Service.instance().crearUsuario(p);
-            System.out.println("INSIDE REGISTER API NICE");
 
         } catch (Exception ex) {
             System.out.println("RIP ADD");

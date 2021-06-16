@@ -1,7 +1,20 @@
+
+
 function clickNuevaSala(){
   $('#crearsala').click(
     function(){
-      newSala()
+      if(dataIsCompleteSala()){
+        if(user.getRol()==0){
+          newSala()  
+        }
+        else{
+          console.log('User not valid')
+        }
+      }
+      else{
+        console.log('Data is not Complete')
+      }
+        
     }
   );
 }
@@ -33,7 +46,22 @@ function newSala(){
   if(isValid){
     addSala();
   }
+  else{
+    console.log('Nombre de Sala no valido')
+  }
 
+}
+
+function dataIsCompleteSala(){
+  let nombreSala = $('#nuevasalanombre').val()
+  if(!nombreSala){//el nombre esta vacio
+    return false
+  }
+  //el nombre es solo whitespaces, casi lo mismo que vacio
+  if (!nombreSala.replace(/\s/g, '').length) {
+    return false
+  }
+  return true;
 }
 
   

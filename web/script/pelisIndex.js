@@ -24,15 +24,73 @@ var dropdownAllMovies=`
 
 //limpia la table de proyecciones
 function cleanModalTableProyec(){
+ 
+    $('#modalProyecPeliculas tbody tr').remove()
+    $('#dropdownCarteleraContainer option').remove()
     $('#closeBtnModal').click(
         function(){
-            
             $('#modalProyecPeliculas tbody tr').remove()
+            
+
             gridProyecciones.length = 0
+            selectedMoviePrice = 0
+            selectedMovie = 0
+            cantidadSeats = 0
+            ticketPrice = 0
+            $('#dropdownCarteleraContainer option').remove()
         }
     );
 }
 
+
+function clickComprarTiquetes(){
+    $('#buyBtnModal').click(
+      function(){
+        if(canBuyTicket()){
+            let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
+            let newTicket = {id:"0",id_proyeccion:"0",id_cliente:"",asiento:""}
+
+            if (allSeats.length>1){//hay que mandar varios tiquetes
+
+                for (let index = 0; index < allSeats.length; index++) {
+                    const element = allSeats[index];
+
+                    newTicket.id_proyeccion = selectedMovie.id;
+                    newTicket.id_cliente = current_user.idM;
+                    newTicket.asiento = element;
+
+
+                    
+
+                    let request = new Request(url + "api/usuarios/login",
+                      {method: 'POST',headers :{'Content-Type': 'application/json'},
+                        body: JSON.stringify(current_user)}
+                    );
+
+                    const response = fetch(request);
+                    if(!response.ok){
+                        console.log('Bad response')
+                        //falta modal para erorres o con bootstrap o un alert
+                        continue;
+                    }
+
+                    
+                }
+            }
+            else{
+
+            }
+  
+        }
+        else{
+            console.log(JSON.parse(localStorage.getItem('selected_seats')))
+            console.log('No se pueden comprar tiquetes')
+        }
+  
+        
+      }
+    )
+  }
 
 
 function getPeliculas(){ //from DB
@@ -48,7 +106,7 @@ function getPeliculas(){ //from DB
         }
         gridPeliculas = await response.json(); 
         renderGridPeliculas();
-        renderDropdownCartelera();
+        
 
     })();
 }
@@ -82,8 +140,8 @@ function getProyecciones(){
   
         return;
       }
-      allProyecciones = await response.json();
 
+      allProyecciones = await response.json();
     })();
 }
 
@@ -94,9 +152,14 @@ function filterMovies(){
 }
 
 function getProyeccionesbyPeli(idmovie){
-    gridProyecciones = allProyecciones.filter(
-        element => element.pelicula_id == idmovie
-    )
+    gridProyecciones = new Array;
+    for (let index = 0; index < allProyecciones.length; index++) {
+        if(allProyecciones[index].pelicula_id == idmovie){
+            gridProyecciones.push(allProyecciones[index])
+        }
+        
+    }
+
 }
 
 function getNameSalabyId_(idsala){
@@ -112,22 +175,36 @@ function getNameSalabyId_(idsala){
 //renderiza las proyecciones del Modal
 function renderModalProyec(idmovie){
     getProyeccionesbyPeli(idmovie)
+    gridProyecciones.forEach(
+        (element)=>{
+            newRowModalProyec(element)  
+            newOptionDropdown(element) 
+        }
 
-
-    for (let index = 0; index < gridProyecciones.length; index++) {
-        newRowModalProyec(gridProyecciones[index])     
-    }
+    )
 }
 
+
+
+//row de la tabla del modal
 function newRowModalProyec(element){
+
+
     let row = $('#tableProyecPeli > tbody:last-child')
     .append(
         '<tr class="table-secondary .d-sm-flex">'+
-        '<th scope="row">'+getNameSalabyId_((element.sala_id).toString())+'</th>'+
+        '<td scope="row">'+element.id+'</td>'+
+
+        '<th >'+getNameSalabyId_((element.sala_id).toString())+'</th>'+
         '<td >'+element.fecha+'</td>'+
         '<td >'+element.hora+'</td>'+
-        +'</tr>'
+
+        '</td>'+'</tr>'
     )
+    console.log('NEW ROW')
+
+    
+    
   $('#tableProyecPeliBody').append(row)
 }
 
@@ -177,6 +254,10 @@ function newRowGrid(pelicula){
     })
     .click(
         function(){ 
+            selectedMovie = pelicula
+            selectedMoviePrice = pelicula.precio
+            localStorage.setItem('selected_movie',JSON.stringify(selectedMovie))
+            localStorage.setItem('selectedMoviePrice',JSON.stringify(selectedMoviePrice))
             renderModalProyec(pelicula.id)
         }
     )
@@ -206,11 +287,19 @@ function renderDropdownCartelera(){
     )
 }
 
-function newOptionDropdown(element){
+function getMovieProve(idmovie){
+    movie = gridPeliculas.find(
+        element => element.id == idmovie
+    )
+    return movie.precio
+}
+
+function newOptionDropdown(proyeccion){
     let option = $('<option>',{
-        text: element.nombre +" "+"($"+element.precio+")",
-        id:element.id,
-        value:element.precio,
+        text: proyeccion.id,
+        id:proyeccion.id,
+        value: getMovieProve((proyeccion.pelicula_id).toString()),
+        
     })
     $('#dropdownCarteleraContainer').append(option)
 
@@ -226,7 +315,9 @@ function renderAll(){
 }
 
 function whenloaded(){
+
     cleanModalTableProyec();
+    clickComprarTiquetes();
     renderAll();
     getPeliculas();
     getSalas();

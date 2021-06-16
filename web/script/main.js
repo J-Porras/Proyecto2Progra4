@@ -1,12 +1,25 @@
 url = "http://localhost:8080/Proyecto2Progra4/";
+
+
+var current_title = $(document).attr('title');
+
 var current_user = {contrasenna:"-",id:"-",nombre:"-",rol:"-1"};
+
+var user = new User();
+user.setUser()
+console.log(user)
+
+var selectedMovie
+var selectedMoviePrice = 0
+var ticketPrice = 0
+var selectedProyec
 //id,nombre,contra,rol
 
 
+var cantidadSeats = document.getElementById('count');
 
 const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('dropdownCarteleraContainer'); //movie
 const peliculas = document.getElementById('movies'); //movies
@@ -18,18 +31,12 @@ const columnsSeatsCantidad = 8;
 
 /////////////////////////////
 
-var current_title = $(document).attr('title');
 
 if(current_title == 'Cinema24+1'){
 
   populateUI();
 
-  let ticketPrice = +movieSelect.value;
-
-  function setMovieData(movieIndex, moviePrice) {
-    localStorage.setItem('selectedMovieIndex', (movieIndex));
-    localStorage.setItem('selectedMoviePrice', (moviePrice));
-  }
+  ticketPrice = +movieSelect.value;
 
   function updateSelectedCount() {
     //devuelve una list de seat que estan selected
@@ -44,16 +51,17 @@ if(current_title == 'Cinema24+1'){
 
     )
 
-    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+    localStorage.setItem('selected_seats', JSON.stringify(seatsIndex));
 
     const selectedSeatsCount = selectedSeats.length;
 
-    count.innerText = selectedSeatsCount;
-    total.innerText = selectedSeatsCount * ticketPrice;
+    //pone el precio final de los billetes
+    cantidadSeats.innerText = selectedSeatsCount;
+    total.innerText = selectedSeatsCount * selectedMoviePrice;
   }
 
 
-  //pone el precio final de los billetes
+  //pone cuales estan disponibles y cuales no (asientos)
   function populateUI() {
     console.log('Populate UI')
     const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
@@ -66,20 +74,12 @@ if(current_title == 'Cinema24+1'){
       });
     }
 
-    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-
-    if(selectedMovieIndex !== null) {
-      movieSelect.selectedIndex = selectedMovieIndex;
-    }
   }
 
   movieSelect.addEventListener('change', (e) => {
     ticketPrice = +e.target.value;
-    setMovieData(e.target.selectedIndex, e.target.value);
     updateSelectedCount();
   })
-
-
 
 
   container.addEventListener('click', (e) => {
@@ -93,6 +93,19 @@ if(current_title == 'Cinema24+1'){
   })
 
   updateSelectedCount();
+
+
+
+  ///////////
+  
+  $('#dropdownCarteleraContainer').change(function(){ 
+    var value = $(this).text();
+    value =  $( "#dropdownCarteleraContainer option:selected" ).text();
+    setselectedProyeccion(value)
+  });
+  
+
+
 
 }//fin if
 
@@ -120,9 +133,41 @@ function generateSeats(){
 
 }
 
+function setSelectedMovie(themovie){
+  selectedMovie = themovie
+  localStorage.setItem('selected_movie',JSON.stringify(themovie))
+}
 
+
+function setselectedProyeccion(proyec){
+  selectedProyec = proyec
+  localStorage.setItem('selected_proyec',JSON.stringify(selectedProyec))
+}
 
 /////////////////////////////////////
+
+
+function canBuyTicket(){
+  let themovie = JSON.parse(localStorage.getItem('selected_movie'))
+  let theproyeccion = JSON.parse(localStorage.getItem('selected_proyec'))
+  let theuser = JSON.parse(localStorage.getItem('usuario_actual'))
+  let asientos = JSON.parse(localStorage.getItem('selected_seats'))
+  if(jQuery.isEmptyObject(themovie) || jQuery.isEmptyObject(theproyeccion)
+    || jQuery.isEmptyObject(theuser)| jQuery.isEmptyObject(asientos))
+    {
+      return false
+    }
+    return true
+}
+
+function isAdmin(){
+  return user.getRol() == '1'
+}
+
+
+
+
+//////////////
 
 //Formulario de Login
 function openForm() {
@@ -147,13 +192,25 @@ function closeForm() {
 }
 
 
+//Clicks
+
+
+
+
+function clickProyecModal(){
+  $('#selecProyecBtn').click(
+    function(){
+      localStorage.setItem('selected_movie',selectedMovie)
+    }
+  )
+}
+
 
 
 function clickLogin(){
 
   $('#btnLogin').click(
     function(){
-      console.log('click login')
 
       login();
     }
@@ -164,7 +221,18 @@ function clickLogin(){
 function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
+  user.cleanUser()
   document.location = url;
+}
+
+//registrar
+function clickRegister(){
+
+  $('#btnRegister').click(
+    function(){
+      register();
+    }
+  );
 }
 
 
@@ -189,15 +257,7 @@ function closeFormRegister() {
 }
 
 
-//registrar
-function clickRegister(){
 
-  $('#btnRegister').click(
-    function(){
-      register();
-    }
-  );
-}
 
 
 
@@ -254,7 +314,6 @@ function login(){
   current_user.id =  $('#idlogin').val();
   current_user.contrasenna = $('#contrasena').val();
 
-  console.log('Usuario a mandar '+current_user)
 
   let request = new Request(url + "api/usuarios/login",
     {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -263,25 +322,21 @@ function login(){
 
 
 
-
   (async () =>{
 
 
     const response = await fetch(request);
-    console.log('Response:'+response)
 
     if(!response.ok){
-      console.log('Bad response')
-
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
     current_user = await response.json();
 
-    console.log('Good response')
 
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));
-    console.log(current_user)
+    user.setUser();
+
     location.reload()
 
     //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
@@ -309,7 +364,7 @@ function register(){
     const response = await fetch(request);
 
     if(!response.ok){
-      alert('error Register')
+      console.log('error Register')
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
@@ -322,47 +377,6 @@ function register(){
 
 }
 
-
-
-/*el fetch and list en nuestro caso devuelve la lista de proyecciones
-para insertarlas en las salas, es lo primero que hace el browser 
-
-function fetchAndList(){
-  let request = new Request(url+'api/usuarios', 
-    {method: 'GET', headers: { }}
-  );
-    (async ()=>{
-        const response = await fetch(request);
-        if (!response.ok) {errorMessage(response.status,$("#buscarDiv #errorDiv"));return;}
-        personas = await response.json();
-        list();              
-    })();
-}*/
-
-
-
-  // Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
-  /*i = 0;
-  while(i<2){
-    var div = document.createElement("div");
-
-    div.classList.add("mov-container");
-
-    var img = document. createElement("img");
-    img.classList.add('poster');
-
-    img.setAttribute('src','images/pelicula.jpg');
-    
-    var descripcion = document.createElement("div");
-    descripcion.appendChild(document.createTextNode("afdsfasfadsfasdfasdfaiiadsbfijadsbifbasdijfiajsdbfjiabsdiufbasuidfb iufbadsiubfiuasdbfiusadbfuisdb sssssssskdsa nfldsknfosadknfoadsnfoikasdnfonasdokfa sd faidsnf óa{s kjfokasfosifoisdnfoiasdsssssssfasdfasdfasdfasdfasdfasdfDescripcion: "+ i));
-    descripcion.classList.add('descripcion');
-    descripcion.setAttribute("value",i);
-    div.appendChild(descripcion);
-    div.appendChild(img);
-    peliculas.appendChild(div);
-    i+=1;
-  }*/
-
 function whenloaded(){
   
   clickLogin();
@@ -370,7 +384,10 @@ function whenloaded(){
   clickNuevaSala();
   clickNuevaPeli();
   clickNuevaProyec();
-  clickTiquetes()
+  clickTiquetes();
+  clickProyecModal();
+  isAdmin();
+
 
   openForm();
   closeForm();

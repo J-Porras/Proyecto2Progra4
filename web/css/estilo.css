@@ -125,17 +125,25 @@ body {
     align-items: center;
 }
 
+.dropdownProyec{
+    margin: 20px 0;
+      margin: auto;
+
+    align-items: center;
+    justify-content: center;   
+}
+
 .row {
     justify-content: center;   
 }
 
 .screen {
-    background-color: #ffff;
-    height: 70px;
+    background-color: #4D4D4D;
+    height: 70px; 
     width: 100%;
     margin: 15px 0;
     transform: rotateX(-45deg);
-    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 1px 10px rgba(255, 255, 255, 0.7);
 }
 
 p.text {
@@ -187,7 +195,7 @@ form h1{
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
     background-color: #ddd;
     outline: none;
-}co
+}
 
 
 .form-container .btn {

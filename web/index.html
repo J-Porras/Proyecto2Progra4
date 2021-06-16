@@ -28,7 +28,7 @@
                 <img class="" src="images/x.jpg" alt="Cerrar" id="closeFormLogin">
                 <h1>Login</h1>
                 <input type="text" id = "idlogin" placeholder="ID" name="-" required>
-                <input type="password" id="contrasena" placeholder="Contraseña" name="-" required>
+                <input type="password" id="contrasena" placeholder="Contraseña" name="-" required autocomplete="off">
                 <button type="submit" class="btn" id="btnLogin">Login</button>
             </form>
         </div>
@@ -44,7 +44,7 @@
 
                 <input type="text" id = "idregister" placeholder="ID" name="-" required>
                 
-                <input type="password" id="contrasenaregister" placeholder="Contrasena" name="-" required>
+                <input type="password" id="contrasenaregister" placeholder="Contrasena" name="-" required autocomplete="off">
                 <button type="submit" class="btn" id="btnRegister">Registrarse</button>
             </form>
         </div>
@@ -67,20 +67,70 @@
                                 <table class="table mx-auto mt-3 col-md-12 " id="tableProyecPeli"  style="width: 500px;">
                                     <thead>
                                       <tr class="table-secondary mx-auto">
+                                        <th scope="col">ID</th>
                                         <th scope="col">Sala</th>
                                         <th scope="col">Fecha</th>
                                         <th scope="col">Hora</th>
 
+
+
                                       </tr>
                                     </thead>
+
                                       <tbody id="tableProyecPeliBody">
                                     </tbody>
-                                  </table>
+                                </table>
+                                <div class="dropdownProyec">
+                                    <label>Elija la proyeccion</label>
+                                    <select id="dropdownCarteleraContainer">
+                                        <!--JS-->
+                                    </select>
+                                </div>
+                                    
+
+                                  <ul class="showcase">
+                                    <li>
+                                        <div class="seat"></div>
+                                        <small>Disponible</small>
+                                    </li>
+                                    <li>
+                                        <div class="seat selected"></div>
+                                        <small>Elegido</small>
+                                    </li>
+                                    <li>
+                                        <div class="seat occupied"></div>
+                                        <small>Ocupado</small>
+                                    </li>
+                                </ul>
+                                
+                                <div class="container">
+                                    <div class="screen"></div>
+                        
+                                    <div id="seatsContainer">
+                                        <!-- Seats por JS -->
+                                    </div>
+                        
+                                </div>
+                        
+                                
+                                <p class="text-asientos">Se han elegido
+                                    <span id="count">0</span>
+                                    por el precio total de $ <span id="total">0</span>
+                                </p>
+
+
+
+
+
+
+                                  
                             </div>
                         <div class="modal-footer">
 
+                        
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeBtnModal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="buyBtnModal">Comprar Tiquetes</button>
                     </div>
                 </div>
             </div>
@@ -99,17 +149,7 @@
         <div class="movies" id="movies">
             
         </div>
-
-       
-
-
-        <div class="movie-container">
-            <label>Elija una pelicula</label>
-            <select id="dropdownCarteleraContainer">
-                <!--JS-->
-            </select>
-        </div>
-        
+     
         <ul class="showcase">
             <li>
                 <div class="seat"></div>
@@ -141,8 +181,9 @@
         </p>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+        <script src='script/'></script>
         <script src='script/navbarLoader.js'></script>
+        
         <script src='script/main.js'></script>
         <script src='script/pelisIndex.js'></script>
 

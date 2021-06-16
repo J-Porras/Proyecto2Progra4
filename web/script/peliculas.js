@@ -4,7 +4,18 @@ function clickNuevaPelicula(){
 
     $('#crearpeli').click(
         function(){
-            newPelicula()
+            if(dataIsCompletePeliculas()){
+                if(user.getRol()==0){
+                    newPelicula()
+                }
+                else{
+                    console.log('User not valid')
+                }
+            }
+            else{
+                console.log('Data is not complete')
+            }
+            
         }   
     );
 
@@ -55,6 +66,29 @@ function addImagen(){
             return;
         }              
     })();    
+}
+
+function dataIsCompletePeliculas(){
+    let nomPeli = $('#nuevapelinombre').val()
+    if(!nomPeli){//el nombre esta vacio
+        return false
+    }
+    //el nombre es solo whitespaces, casi lo mismo que vacio
+    if (!nomPeli.replace(/\s/g, '').length) {
+        return false
+    }
+
+    let precioPeli = $('#nuevapeliprecio').val()
+    if(!precioPeli){//el nombre esta vacio
+        return false
+    }
+    //el nombre es solo whitespaces, casi lo mismo que vacio
+    if (!precioPeli.replace(/\s/g, '').length) {
+        return false
+    }
+    
+
+    return true;
 }
 
 

@@ -47,8 +47,8 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` varchar(50)  NOT NULL,
   `nombre` varchar(50) NOT NULL ,
-   `contrasenna` varchar(50) NOT NULL ,
-   `rol` int NOT NULL ,
+  `contrasenna` varchar(50) NOT NULL ,
+  `rol` int NOT NULL ,
   PRIMARY KEY (`id`)
 ) ;
 
