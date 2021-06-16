@@ -15,7 +15,7 @@
 
 body {
     /*padding-top: 20%; */
-    background: #4D4D4D;
+    background: #5a5a5a;
     display: flex;
     flex-direction: column;
 
@@ -24,8 +24,10 @@ body {
     height: 100vh;
     font-family: 'Lato', sans-serif;
     margin: 0;
-    color: #ffff;
+
+    
 }
+
 
 
 .text-asientos

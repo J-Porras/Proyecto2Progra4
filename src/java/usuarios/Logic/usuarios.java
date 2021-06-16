@@ -26,7 +26,7 @@ public class usuarios {
     }
     
     public void cleanPassword(){
-        this.contrasenna = "";
+        this.contrasenna = "-";
     }
 
     

@@ -12,6 +12,16 @@ const movieSelect = document.getElementById('movie');
 const peliculas = document.getElementById('movies');
 
 
+const rowsSeatsCantidad = 6;
+const columnsSeatsCantidad = 8; 
+
+
+var dropdownAllMovies=`
+  <select id="movie">
+  </select>
+`
+
+
 var current_title = $(document).attr('title');
 
 if(current_title == 'Cinema24+1'){
@@ -99,6 +109,31 @@ if(current_title == 'Cinema24+1'){
   updateSelectedCount();
 
 }//fin if
+
+
+//generando los asientos visualmente y las columnas
+function generateSeats(){
+  let singleSeat;
+
+
+  for (let rows = 0; rows < rowsSeatsCantidad; rows++) {
+    let rowSeats = $('<div/>')
+    .addClass('row')
+
+    for (let columns = 0, numAsiento = 1; columns < columnsSeatsCantidad; columns++,numAsiento++) {
+      singleSeat = $('<div/>',{
+        id: ((rows+10).toString(36)).toUpperCase() + numAsiento
+      })
+      .addClass('seat')
+
+      rowSeats.append(singleSeat)
+    }
+
+    $('#seatsContainer').append(rowSeats)
+  }//fin for rows
+
+}
+
 
 
 /////////////////////////////////////
@@ -335,6 +370,8 @@ function whenloaded(){
   closeForm();
   openFormRegister();
   closeFormRegister();
+
+  generateSeats();
 
 }
 

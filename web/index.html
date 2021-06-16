@@ -11,8 +11,8 @@
 
         <!-- CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
         <link rel='stylesheet' type='text/css' href='css/estilo.css'>
+
 
        
     </head>
@@ -49,8 +49,51 @@
             </form>
         </div>
 
+
+        
+        <!-- Modal Proyecciones de la Pelicula -->
+        <div 
+            class="modal fade"
+            id="modalProyecPeliculas" 
+            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg" >
+                <div class="modal-content" style="width: 850px;">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Proyecciones actuales</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                            <div class="modal-body">
+                                <table class="table mx-auto mt-3 col-md-12 " id="tableProyecPeli"  style="width: 500px;">
+                                    <thead>
+                                      <tr class="table-secondary mx-auto">
+                                        <th scope="col">Sala</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Hora</th>
+
+                                      </tr>
+                                    </thead>
+                                      <tbody id="tableProyecPeliBody">
+                                    </tbody>
+                                  </table>
+                            </div>
+                        <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeBtnModal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
         <div id="gridPelisContainer">
-            <h3>Text</h3>
+            
         </div>
 
         <div class="movies" id="movies">
@@ -87,72 +130,14 @@
         
         <div class="container">
             <div class="screen"></div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
+
+            <div id="seatsContainer">
+                <!-- Seats por JS -->
             </div>
 
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat occupied"></div>
-                <div class="seat"></div>
-            </div>
-
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
         </div>
+
+        
         <p class="text-asientos">Se han elegido
             <span id="count">0</span>
             por el precio total de $<span id="total">0</span>
@@ -161,9 +146,10 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src='script/navbarLoader.js'></script>
-        <script src='script/pelisIndex.js'></script>
         <script src='script/main.js'></script>
+        <script src='script/pelisIndex.js'></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
             
 
