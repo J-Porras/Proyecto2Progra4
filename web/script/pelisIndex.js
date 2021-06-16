@@ -48,6 +48,7 @@ function getPeliculas(){ //from DB
         }
         gridPeliculas = await response.json(); 
         renderGridPeliculas();
+        renderDropdownCartelera();
 
     })();
 }
@@ -210,7 +211,7 @@ function newOptionDropdown(element){
         text: element.nombre +" "+"($"+element.precio+")",
         id:element.id
     })
-    $('#dropdownMoviesContainer').append(option)
+    $('#dropdownCarteleraContainer').append(option)
 
 }
 
@@ -219,6 +220,7 @@ function newOptionDropdown(element){
 
 
 function renderAll(){
+    $('#dropdownMovieContainer').append(dropdownAllMovies)
     $('#gridPelisContainer').append(gridPeliculasDefault)
 }
 

@@ -8,25 +8,21 @@ const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied)');
 const count = document.getElementById('count');
 const total = document.getElementById('total');
-const movieSelect = document.getElementById('movie');
-const peliculas = document.getElementById('movies');
+const movieSelect = document.getElementById('dropdownCarteleraContainer'); //movie
+const peliculas = document.getElementById('movies'); //movies
 
-
+////////////////////////
 const rowsSeatsCantidad = 6;
 const columnsSeatsCantidad = 8; 
 
 
-var dropdownAllMovies=`
-  <select id="movie">
-  </select>
-`
-
+/////////////////////////////
 
 var current_title = $(document).attr('title');
 
 if(current_title == 'Cinema24+1'){
   // Cargando peliculas (cambiar por alguna funcion o por lo trabajado por el backend)
-  i = 0;
+  /*i = 0;
   while(i<2){
     var div = document.createElement("div");
 
@@ -45,7 +41,7 @@ if(current_title == 'Cinema24+1'){
     div.appendChild(img);
     peliculas.appendChild(div);
     i+=1;
-  }
+  }*/
   populateUI();
 
   let ticketPrice = +movieSelect.value;
@@ -56,10 +52,17 @@ if(current_title == 'Cinema24+1'){
   }
 
   function updateSelectedCount() {
+    //devuelve una list de seat que estan selected
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
-    const seatsIndex = [...selectedSeats].map((seat) =>{
-      return [...seats].indexOf(seat)
-    })
+
+    const seatsIndex = [...selectedSeats].map(
+      (seat) =>
+      {
+        //return [...seats].indexOf(seat)
+        return seat.id;
+      }
+
+    )
 
     localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
@@ -69,7 +72,10 @@ if(current_title == 'Cinema24+1'){
     total.innerText = selectedSeatsCount * ticketPrice;
   }
 
+
+  //pone el precio final de los billetes
   function populateUI() {
+    console.log('Populate UI')
     const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
 
     if (selectedSeats !== null && selectedSeats.length > 0) {
