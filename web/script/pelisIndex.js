@@ -209,7 +209,8 @@ function renderDropdownCartelera(){
 function newOptionDropdown(element){
     let option = $('<option>',{
         text: element.nombre +" "+"($"+element.precio+")",
-        id:element.id
+        id:element.id,
+        value:element.precio,
     })
     $('#dropdownCarteleraContainer').append(option)
 
