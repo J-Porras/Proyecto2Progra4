@@ -37,8 +37,8 @@ CREATE TABLE `proyecciones` (
   `fecha` varchar(50) NOT NULL ,
   `hora` varchar(50) NOT NULL ,
   `pelicula_id` int,
-  CONSTRAINT `sala_fk` FOREIGN KEY (`sala_id`) REFERENCES `peliculas` (`id`),
-  CONSTRAINT `pelicula_fk` FOREIGN KEY (`pelicula_id`) REFERENCES `salas` (`id`),
+  CONSTRAINT `sala_fk` FOREIGN KEY (`sala_id`) REFERENCES `salas` (`id`),
+  CONSTRAINT `pelicula_fk` FOREIGN KEY (`pelicula_id`) REFERENCES `peliculas` (`id`),
   PRIMARY KEY (`id`)
 );
 

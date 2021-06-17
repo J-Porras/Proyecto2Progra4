@@ -34,6 +34,7 @@ function getPeliculas(){ //from DB
         return;
       }
       allPeliculas = await response.json();
+      getProyecciones()
       
   })();
 }
@@ -52,8 +53,7 @@ function getProyecciones(){
       }
       
       allProyecciones = await response.json();
-      console.log(allProyecciones)
-      getPeliculas()
+  
       getMisTiquetes();
   })(); 
 }
@@ -136,7 +136,7 @@ function render(){
 
 function whenloaded(){
   render()
-  getProyecciones()
+  getPeliculas()
 }
 
 $(whenloaded)

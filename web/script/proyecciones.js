@@ -10,7 +10,6 @@ function clickNuevaProyeccion(){
     $('#crearProyec').click(
         function(){
             newProyeccion()
-            //location.reload();
         }
     );
 }
@@ -41,12 +40,15 @@ function newProyeccion(){
             return;
         }
     })(); 
+    waitload();
 
 
 }
 
 
-
+function waitload(){
+    location.reload();
+}
 
 
 function whenloaded(){
