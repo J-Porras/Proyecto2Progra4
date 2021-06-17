@@ -21,7 +21,45 @@ function clickNuevaPelicula(){
 
 }
 
+function clickListMovie(){
+    $('#listAllMoviesContainer').click(function(){ 
+        var value = $(this).text();
+        value =  $("#listAllMoviesContainer option:selected").text();
 
+        $('#peliEditPlaceholder').val(value)
+
+
+    });
+}
+
+function clickEditMovie(){
+    $('#editMovieBtn').click(function(){  
+        editMovie($("#peliEditPlaceholder").val())
+
+
+    });
+}
+
+function editMovie(id_movie){
+    let request = new Request(url + "api/peliculas/"+id_movie,
+        { method: 'PUT',headers :{} }
+    );
+
+    (async ()=>{
+
+        const response = await fetch(request);
+        if (!response.ok) {
+
+          return;
+        }
+        
+        waitReload()
+    })();
+}
+
+function waitReload(){
+    location.reload()
+}
 
 function newPelicula(){
 
@@ -91,8 +129,47 @@ function dataIsCompletePeliculas(){
     return true;
 }
 
+function newOptionList(element){
+    let option = $('<option>',{
+        text: element.id,
+        id: element.nombre,
+        
+    })
+
+    $('#listAllMoviesContainer').append(option)
+}
+
+function renderOptionsList(){
+    
+    peliculas_.forEach(
+        (element) => newOptionList(element)
+    )
+
+}
+
+function getPeliculas2(){ //from DB
+    let request = new Request(url + "api/peliculas",
+        { method: 'GET',headers :{} }
+    );
+
+    (async ()=>{
+
+        const response = await fetch(request);
+        if (!response.ok) {
+
+          return;
+        }
+        peliculas_ = await response.json();
+        renderOptionsList();
+
+    })();
+}
+
 
 function whenloaded(){
+    getPeliculas2();
+    clickEditMovie();
+    clickListMovie();
     clickNuevaPelicula();
 }
 

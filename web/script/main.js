@@ -93,9 +93,9 @@ if(current_title == 'Cinema24+1'){
 
   ///////////
   
-  $('#dropdownCarteleraContainer').change(function(){ 
+  $('#dropdownCarteleraContainer').click(function(){ 
     var value = $(this).text();
-    value =  $( "#dropdownCarteleraContainer option:selected" ).text();
+    value =  $("#dropdownCarteleraContainer option:selected").text();
     
     setselectedProyeccion(value)
     getTicketsProyec(value)
@@ -104,6 +104,9 @@ if(current_title == 'Cinema24+1'){
   });
   
 
+  //function defaultProyeccion(){
+
+ // }
 
 
 }//fin if
@@ -125,7 +128,7 @@ function generateSeats(){
     .addClass('row')
 
     for (let columns = 0, numAsiento = 1; columns < (columnsSeatsCantidad); columns++,numAsiento++) {
-      
+
       idSeat = ((rows+10).toString(36)).toUpperCase() + numAsiento
       if(seatOccupied(idSeat)){
         singleSeat = $('<div/>',{

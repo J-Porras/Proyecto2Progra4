@@ -221,7 +221,7 @@ function render(){
 
 
 function clickSelect(){//selecciona el id del tiquete de la list
-  $('#listTiquetesContainer').change(function(){ 
+  $('#listTiquetesContainer').click(function(){ 
     idTiquete = $(this).text();
     
     idTiquete =  $( "#listTiquetesContainer option:selected" ).text();

@@ -10,7 +10,7 @@ function clickNuevaProyeccion(){
     $('#crearProyec').click(
         function(){
             newProyeccion()
-            location.reload();
+            //location.reload();
         }
     );
 }
@@ -28,7 +28,6 @@ function newProyeccion(){
     ).id
 
 
-    console.log('Enviando request nueva proyeccio')
 
     let request = new Request(url + "api/proyecciones",
     { method: 'POST',headers :{'Content-Type': 'application/json'},

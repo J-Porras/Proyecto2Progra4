@@ -92,8 +92,10 @@ public class proyeccionesDAO {
         stm.setString(2, pel.getFecha());
         stm.setString(3, pel.getHora());
         stm.setInt(4, pel.getPelicula_id());
+        
         System.out.println("Sala ID:"+pel.getSala_id()+"Fecha"+pel.getFecha()+
                 "Hora:"+pel.getHora()+"Peli ID:"+pel.getPelicula_id());
+        
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("Proyeccion ya existe");

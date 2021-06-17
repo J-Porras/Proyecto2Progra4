@@ -60,21 +60,21 @@ CREATE TABLE `tiquetesComprados` (
   `id_proyeccion` int DEFAULT NULL,
   `id_cliente` varchar(50) NOT NULL,
   `asiento` varchar(9) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id` ,`id_cliente`,`asiento`),
+  PRIMARY KEY (`id` ),
   CONSTRAINT `proyec_fk` FOREIGN KEY (`id_proyeccion`) REFERENCES `proyecciones` (`id`),
   CONSTRAINT `cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `usuarios` (`id`)
 );
 
 
-insert into Usuarios (id,nombre,contrasenna,rol) values('1234', 'Pedro Admin','1234',0);
-insert into Usuarios (id,nombre,contrasenna,rol) values('4321', 'Diana Prueba','1234',1);
+insert into Usuarios (id,nombre,contrasenna,rol) values('1234', 'Admin','1234',0);
+insert into Usuarios (id,nombre,contrasenna,rol) values('4321', 'Alexa','1234',1);
 select * from Usuarios;
 
-insert into peliculas (nombre,precio,cartelera) values( 'Avengers',1500,TRUE);
+insert into peliculas (nombre,precio,cartelera) values( 'Thor',150,TRUE);
 select * from peliculas;
 insert into salas (nombre) values( 'Sala 1');
 select * from salas;
-insert into proyecciones (sala_id,fecha,hora,pelicula_id) values( 1,'10/10/2021','2:00',1);
+insert into proyecciones (sala_id,fecha,hora,pelicula_id) values(1,'10/10/2021','2:00',1);
 select * from proyecciones;
 insert into tiquetesComprados (id_proyeccion,id_cliente,asiento) values( 1,'4321','A4');
 select * from tiquetesComprados;

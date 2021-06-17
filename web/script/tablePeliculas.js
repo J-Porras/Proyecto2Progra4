@@ -33,6 +33,8 @@ function getPeliculas(){ //from DB
           return;
         }
         peliculas_ = await response.json();
+        console.log(peliculas_)
+
         changeTable();
     })();
 }
@@ -55,10 +57,11 @@ function newRow(element){
     '<td >'+element.nombre+'</td>'+
     '<td >'+element.precio+'</td>'+
     '<td >'+estaEnCartelera(element)+'</td>'+
-    "<td><img src='"+url+"api/peliculas/"+element.id+"/imagen' class='icon_large img-thumbnail img-responsive w-60 p-3' ></td>"+                
+    "<td><img src='"+url+"api/peliculas/"+element.id+"/imagen' class='icon_large img-thumbnail img-responsive w-15 p-3' ></td>"+                
 
     '</tr>')
   $('#tablePeliculasbody').append(row)
+  
 }
 
 function estaEnCartelera(themovie){

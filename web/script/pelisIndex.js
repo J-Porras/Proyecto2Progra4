@@ -3,6 +3,7 @@ gridSalas = new Array()
 allProyecciones = new Array()//todas
 gridProyecciones = new Array()//de la pelicula seleccionada
 allTiquetes = new Array()
+peliculasCartelera = new Array()
 
 
 var gridPeliculasDefault = `
@@ -206,6 +207,7 @@ function getPeliculas(){ //from DB
           return;
         }
         gridPeliculas = await response.json(); 
+        filterMovies();
         renderGridPeliculas();
         
 
@@ -269,6 +271,10 @@ function getallTiquetes(){
 
 //guarda solo las peliculas que estan en cartelera
 function filterMovies(){
+    peliculasCartelera = gridPeliculas.filter(
+        (element) => element.cartelera == true
+    )
+
 
 }
 
@@ -335,7 +341,7 @@ function newRowModalProyec(element){
 //renderiza las peliculas en Index
 function renderGridPeliculas(idmovie){
     
-    gridPeliculas.forEach(
+    peliculasCartelera.forEach(
         (pelicula) =>{
             newRowGrid(pelicula)
         }
@@ -383,7 +389,7 @@ function newRowGrid(pelicula){
             renderModalProyec(pelicula.id)
         }
     )
-    .addClass("btn btn-primary w-70 p-1" )
+    .addClass("btn btn-primary w-70 p-1 mt-1" )
     .attr('data-bs-toggle','modal')
     .attr('data-bs-target','#modalProyecPeliculas')
     .click()
@@ -402,8 +408,17 @@ function newRowGrid(pelicula){
 
 
 function renderDropdownCartelera(){
+    let optionempty = $('<option>',{
+        text: 'NA',
+        id:0,
+        value: '0',
+        
+    })
+    $('#dropdownCarteleraContainer').append(optionempty)
+
     gridPeliculas.forEach(
-        (movie) =>{
+        (movie,index) =>{
+           
             newOptionDropdown(movie)
         }
     )
