@@ -120,8 +120,61 @@
                     
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeBtnModal">Cerrar</button>
                     <button type="button" class="btn btn-primary" id="buyBtnModal">Comprar Tiquetes</button>
-                    <button type="button" class="btn btn-primary" id="buyBtnAnonimo">Comprar Tiquetes como Anonimo</button>
+                    <button type="button" class="btn btn-primary" 
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalCompraAnonimo" 
+                        data-bs-dismiss="modal"
+                        id="buyBtnAnonimo"
+                    >Comprar Tiquetes como Anonimo</button>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Modal de compra como anonimo-->
+
+        <div class="modal fade" id="modalCompraAnonimo"
+            tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ingrese su nombre, ID y tarjeta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form ingreso datos como anonimo-->
+                        <form>
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                              <input type="email" class="form-control" id="nombreAnon" aria-describedby="nombreHelp">
+                              <div id="nombreHelp" class="form-text">Nunca compartiremos su informacion.</div>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleInputEmail2" class="form-label">ID</label>
+                                <input type="email" class="form-control" id="idAnon">
+                              </div>
+
+                            <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">Numero de Tarjeta</label>
+                              <input type="password" class="form-control" id="numTarjeta">
+                            </div>
+
+                            <button type="button" id="buyBtnModal2"
+                             class="btn btn-primary" 
+                             data-bs-toggle="modal"
+                             data-bs-dismiss="modal"
+                             data-bs-target="#modalProyecPeliculas"
+
+                            >Finalizar Compra</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" id="closeBtnModal2"  class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>

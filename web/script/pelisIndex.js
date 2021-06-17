@@ -72,7 +72,7 @@ function clickComprarTiquetes(){
                 const response = fetch(request);
                 if(!response.ok){
                     console.log('Bad response')
-                    //falta modal para erorres o con bootstrap o un alert
+                    //falta modal para erorres o con bootstrap o un x
                 }
                 generatePDF(newTicket)
                 getTicketsProyec(JSON.parse(localStorage.getItem('selected_proyec')))
@@ -92,8 +92,38 @@ function clickComprarTiquetes(){
 
 
 function clickComprarAnon(){
-    $('#buyBtnAnonimo').click(
+    $('#buyBtnModal2').click(
         function(){
+            if(user.isAnonUser()){
+                let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
+                let newTicket = {asiento:"",id:"-1",id_cliente:"",id_proyeccion:"-1"}
+
+                for (let index = 0; index < allSeats.length; index++) {
+                    const element = allSeats[index];
+    
+                    newTicket.id_proyeccion = selectedProyec
+                    newTicket.id_cliente = $('#idAnon').val()
+                    newTicket.asiento = element;
+    
+    
+                    let request = new Request(url + "api/tiquetescComprados",
+                      {method: 'POST',headers :{'Content-Type': 'application/json'},
+                        body: JSON.stringify(newTicket)}
+                    );
+    
+                    const response = fetch(request);
+                    if(!response.ok){
+                        console.log('Bad response')
+                        //falta modal para erorres o con bootstrap o un alert
+                    }
+                    generatePDF(newTicket)
+                    getTicketsProyec(JSON.parse(localStorage.getItem('selected_proyec')))
+                    
+                    
+                }
+
+            }//else error compra de tiquetes
+            
 
         }
     )
@@ -410,6 +440,7 @@ function whenloaded(){
 
     cleanModalTableProyec();
     clickComprarTiquetes();
+    clickComprarAnon();
     renderAll();
     getPeliculas();
     getSalas();

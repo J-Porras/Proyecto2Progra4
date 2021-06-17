@@ -134,9 +134,15 @@ body {
 }
 
 .row {
+    vertical-align:bottom;
     justify-content: center;   
+
 }
 
+.rowNumber{
+    vertical-align:bottom;
+    justify-content: center;  
+}
 .screen {
     background-color: #4D4D4D;
     height: 70px; 

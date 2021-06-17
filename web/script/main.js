@@ -115,13 +115,17 @@ function generateSeats(){
 
   let singleSeat;
   let idSeat;
+  
 
 
-  for (let rows = 0; rows < rowsSeatsCantidad; rows++) {
+  for (let rows = 0,rowNumbers; rows < rowsSeatsCantidad; rows++,rowNumbers++) {
+
+    
     let rowSeats = $('<div/>')
     .addClass('row')
 
-    for (let columns = 0, numAsiento = 1; columns < columnsSeatsCantidad; columns++,numAsiento++) {
+    for (let columns = 0, numAsiento = 1; columns < (columnsSeatsCantidad); columns++,numAsiento++) {
+      
       idSeat = ((rows+10).toString(36)).toUpperCase() + numAsiento
       if(seatOccupied(idSeat)){
         singleSeat = $('<div/>',{
@@ -135,6 +139,8 @@ function generateSeats(){
         })
         .addClass('seat ')
       }
+
+      
       
       rowSeats.append(singleSeat)
     }
@@ -146,7 +152,6 @@ function generateSeats(){
 
 
 function getTicketsProyec(id_proyec){
-  console.log('ticketsss')
   let request = new Request(url + "api/tiquetescComprados/"+id_proyec,
     {method: 'GET',headers :{'Content-Type': 'application/json'},}
   );
