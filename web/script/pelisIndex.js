@@ -48,50 +48,29 @@ function clickComprarTiquetes(){
       function(){
         if(canBuyTicket()){
             let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
-            let newTicket = {id:0,id_proyeccion:0,id_cliente:"",asiento:""}
+            let newTicket = {asiento:"",id:"-1",id_cliente:"",id_proyeccion:"-1"}
 
-            if (allSeats.length>1){//hay que mandar varios tiquetes
+            for (let index = 0; index < allSeats.length; index++) {
+                const element = allSeats[index];
 
-                for (let index = 0; index < allSeats.length; index++) {
-                    const element = allSeats[index];
-
-                    newTicket.id_proyeccion = parseInt(selectedMovie.id);
-                    newTicket.id_cliente = current_user.id;
-                    newTicket.asiento = element;
-
-
-                    
-
-                    let request = new Request(url + "api/tiquetescComprados",
-                      {method: 'POST',headers :{'Content-Type': 'application/json'},
-                        body: JSON.stringify(newTicket)}
-                    );
-
-                    const response = fetch(request);
-                    if(!response.ok){
-                        console.log('Bad response')
-                        //falta modal para erorres o con bootstrap o un alert
-                    }
-
-                    
-                }
-            }
-            else{
-                newTicket.id_proyeccion = parseInt(selectedMovie.id);
-                newTicket.id_cliente = current_user.id;
+                newTicket.id_proyeccion = selectedMovie.id;
+                newTicket.id_cliente = user.getID()
                 newTicket.asiento = element;
 
+                console.log(newTicket)
+                
+
                 let request = new Request(url + "api/tiquetescComprados",
-                      {method: 'POST',headers :{'Content-Type': 'application/json'},
-                        body: JSON.stringify(current_user)}
-                    );
+                  {method: 'POST',headers :{'Content-Type': 'application/json'},
+                    body: JSON.stringify(newTicket)}
+                );
 
-                    const response = fetch(request);
-                    if(!response.ok){
-                        console.log('Bad response')
-                        //falta modal para erorres o con bootstrap o un alert
-                    }
-
+                const response = fetch(request);
+                if(!response.ok){
+                    console.log('Bad response')
+                    //falta modal para erorres o con bootstrap o un alert
+                }
+                
             }
   
         }

@@ -21,6 +21,12 @@ class User{
         return undefined;
     }
 
+    getID(){
+        if (this.actual_user)
+            return this.actual_user.id;
+        return undefined;
+    }
+
 
 
 
