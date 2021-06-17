@@ -7,7 +7,6 @@ var current_user = {contrasenna:"-",id:"-",nombre:"-",rol:"-1"};
 
 var user = new User();
 user.setUser()
-console.log(user)
 
 var selectedMovie
 var selectedMoviePrice = 0
@@ -34,8 +33,16 @@ const columnsSeatsCantidad = 8;
 
 
 if(current_title == 'Cinema24+1'){
-
-  //populateUI();
+  if(user.isAnonUser()){
+    console.log('if')
+    $('#buyBtnAnonimo').show()
+    $('#buyBtnModal').hide()
+  }
+  else{
+    console.log('else')
+    $('#buyBtnAnonimo').hide()
+    $('#buyBtnModal').show()
+  }
 
   ticketPrice = +movieSelect.value;
 
@@ -62,20 +69,7 @@ if(current_title == 'Cinema24+1'){
   }
 
 
-  //pone cuales estan disponibles y cuales no (asientos)
-  function populateUI() {
-    console.log('Populate UI')
-    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
 
-    if (selectedSeats !== null && selectedSeats.length > 0) {
-      seats.forEach((seat, index) => {
-        if (selectedSeats.indexOf(index) > -1) {
-          seat.classList.add('selected');
-        }
-      });
-    }
-
-  }
 
   movieSelect.addEventListener('change', (e) => {
     ticketPrice = +e.target.value;
@@ -220,17 +214,22 @@ function setselectedProyeccion(proyec){
 
 
 function canBuyTicket(){
+
+
   let themovie = JSON.parse(localStorage.getItem('selected_movie'))
   let theproyeccion = JSON.parse(localStorage.getItem('selected_proyec'))
   let theuser = JSON.parse(localStorage.getItem('usuario_actual'))
   let asientos = JSON.parse(localStorage.getItem('selected_seats'))
   if(jQuery.isEmptyObject(themovie) || jQuery.isEmptyObject(theproyeccion)
-    || jQuery.isEmptyObject(theuser)| jQuery.isEmptyObject(asientos))
-    {
+    || jQuery.isEmptyObject(theuser)|| jQuery.isEmptyObject(asientos))
+  {
       return false
-    }
+  }
+
+
     return true
 }
+
 
 function isAdmin(){
   return user.getRol() == '1'
@@ -294,6 +293,7 @@ function clickLogout(){
   
   localStorage.removeItem('usuario_actual');
   user.cleanUser()
+  current_user = {contrasenna:"-",id:"-",nombre:"-",rol:"-1"};
   document.location = url;
 }
 
@@ -410,14 +410,16 @@ function login(){
 
   (async () =>{
 
+    
 
-    const response = await fetch(request);
+    const response =  await fetch(request);
 
     if(!response.ok){
+      alert('Bad response')
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
-    current_user = await response.json();
+    current_user =  await response.json();
 
 
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));

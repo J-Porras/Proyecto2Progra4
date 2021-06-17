@@ -51,6 +51,7 @@ function cleanModalTableProyec(){
 function clickComprarTiquetes(){
     $('#buyBtnModal').click(
       function(){
+
         if(canBuyTicket()){
             let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
             let newTicket = {asiento:"",id:"-1",id_cliente:"",id_proyeccion:"-1"}
@@ -86,6 +87,15 @@ function clickComprarTiquetes(){
         }
         
       }
+    )
+}
+
+
+function clickComprarAnon(){
+    $('#buyBtnAnonimo').click(
+        function(){
+
+        }
     )
 }
 

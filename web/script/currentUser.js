@@ -27,6 +27,14 @@ class User{
         return undefined;
     }
 
+    isAnonUser(){
+        if(!this.actual_user){
+            return true
+        }
+            
+        return false;
+    }
+
 
 
 

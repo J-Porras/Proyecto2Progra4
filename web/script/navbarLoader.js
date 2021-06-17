@@ -13,7 +13,7 @@ var defaultNavBar =
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                  <button type="button" class="btn btn-primary"  id="toggleLogin">Iniciar Sesion</button>  
+                  <button type="button" class="btn btn-primary me-1"  id="toggleLogin">Iniciar Sesion</button>  
                 </div>`;
 
             `</div>
@@ -30,7 +30,7 @@ function changeNavBar(){
   if(localStorage.getItem('usuario_actual')){//si hay usuario
 
     let rol_actual = JSON.parse(localStorage.getItem('usuario_actual')).rol
-    
+
 
     var logoutBtn = $('<button/>',{
       text : 'Cerrar Sesion',
@@ -45,7 +45,10 @@ function changeNavBar(){
     
     $('#toggleLogin').hide();
 
+    
 
+    //$('#navbarNavAltMarkup').append(useranonimo);
+    $('#toggleLogin').hide();
 
     
     let registertoggleButton = $('registerBtn').hide();
@@ -54,11 +57,12 @@ function changeNavBar(){
       $('registerBtn').hide();
     }
     
-
-
+    console.log('rol actual'+rol_actual)
 
 
     switch (rol_actual) {
+
+      
         case 0:// admin //
             let salasBtn = $('<button/>',{
                 text : 'Registrar Salas',
@@ -103,6 +107,16 @@ function changeNavBar(){
             $('#navbarNavAltMarkup').append(tiquetesBtn);
 
             
+            let nomUser = $('<button/>',{
+              text : 'Usuario: '+JSON.parse(localStorage.getItem('usuario_actual')).nombre,
+              id : 'alltiquetesBtn',
+      
+            })
+            .addClass('btn btn-primary me-1 flex-row-reverse ms-auto')
+
+            .attr('type', 'text');
+            $('#navbarNavAltMarkup').append(nomUser);
+            
         break;
 
         case 1://normies
@@ -116,12 +130,22 @@ function changeNavBar(){
             
             $('#navbarNavAltMarkup').append(MispeliculasBtn);
 
+            let nomUserCliente = $('<button/>',{
+              text : 'Usuario: '+JSON.parse(localStorage.getItem('usuario_actual')).nombre,
+              id : 'alltiquetesBtn',
+      
+            })
+            .addClass('btn btn-primary me-1 flex-row-reverse ms-auto')
+            $('#navbarNavAltMarkup').append(nomUserCliente);
+
+
 
         break;
-    
 
         default:
-            break;
+          
+
+        break;
     }
     
     
@@ -145,6 +169,14 @@ function changeNavBar(){
     .attr('type', 'text');
     $('#navbarNavAltMarkup').append(registerBtn);
 
+    let useranonimo = $('<button/>',{
+      text : 'Usuario anónimo',
+      id : 'useranonimo',
+
+    })
+    .addClass('btn btn-primary me-1 flex-row-reverse ms-auto')
+
+    $('#navbarNavAltMarkup').append(useranonimo);
 
 
 
