@@ -20,6 +20,12 @@ var tableTiquetesDefault = `
 </table>
 `;
 
+function clickToPDF(){
+  
+}
+
+
+
 function getPeliculas(){ //from DB
   let request = new Request(url + "api/peliculas",
       { method: 'GET',headers :{} }
