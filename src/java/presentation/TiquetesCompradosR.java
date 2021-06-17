@@ -50,6 +50,7 @@ public class TiquetesCompradosR {
     @Consumes(MediaType.APPLICATION_JSON) 
     public void addU(tiqueteComprado p) {  
         try {
+            System.out.println("------------------PABLO SE LA COME: ADD TIQUETE");
             Service.instance().crearTiquetesComprados(p);
         } catch (Exception ex) {
             throw new NotAcceptableException(); 

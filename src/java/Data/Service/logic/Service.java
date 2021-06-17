@@ -151,6 +151,7 @@ public class Service {
         tiqueteComprado result = null;
         
         try {
+            System.out.println("INSIDE crearTiquetesComprados");
             result = tiquetescompradosDao.create(s);
         } catch (Exception ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);

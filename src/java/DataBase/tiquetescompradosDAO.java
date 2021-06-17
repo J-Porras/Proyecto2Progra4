@@ -90,7 +90,8 @@ public class tiquetescompradosDAO {
         stm.setString(3, pel.getAsiento());
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
-            throw new Exception("Proyeccion ya existe");
+            System.out.println("Tiquete ya existe");
+            throw new Exception("Tiquete ya existe");
         }
         return pel;
     }
