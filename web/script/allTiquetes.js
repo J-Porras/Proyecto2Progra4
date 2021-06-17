@@ -4,6 +4,7 @@ let allTiquetes = new Array()
 let allPeliculas = new Array()
 let allProyecciones = new Array()
 let idTiquete
+let selectedTicket
 
 let tableallTiquetesDefault = `
 <table class="table mx-auto mt-3 col-md-12 " id="tableTiquetes"  style="width: 500px;">
@@ -22,6 +23,11 @@ let tableallTiquetesDefault = `
   </tbody>
 </table>
 `;
+
+
+
+
+
 
 let selectTiquetes=`
   <select id="selectTiquetes">
@@ -69,16 +75,53 @@ function getProyecciones(){
 function clickGeneratePDF(){
   $('#downloadPDF').click(
     function(){ 
-      console.log('asdasdadasd')
       if(checkID()){
-        console.log('true')
-        const element = document.getElementById(idTiquete);
-        html2pdf(element).set({
+
+
+
+
+        let tiquete = getProyecbyId(idTiquete)
+        console.log(JSON.stringify(tiquete))
+        let tableallTiquetesDefault2 = `
+        <h4 class="mx-auto mt-2 col-md-12" style="user-select: auto;" >Tiquete comprado</h4>
+
+        <table class="table mx-auto mt-3 col-md-12 " id="tableTiquetes"  style="width: 500px;">
+          <thead>
+            <tr class="table-secondary mx-auto">
+              <th scope="col">ID</th>
+              <th scope="col">Pelicula</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Asiento</th>
+              <th scope="col">Fecha</th>
+              <th scope="col"> Hora(24h) </th>
+
+            </tr>
+          </thead>
+            <tbody id="tableTiquetesBody">`+
+            `<tr class="table-secondary .d-sm-flex"`+`id=`+`"`+ tiquete.id+`"`+`>`+
+            `<th scope="row">`+selectedTicket.id+`</th>`+
+            `<td>`+getNamePelibyId(selectedTicket.id_proyeccion)+`</td>` +
+            `<td>`+selectedTicket.id_cliente +`</td>` +
+            `<td>`+selectedTicket.asiento +`</td>` + 
+            `<td>`+getProyecbyId(selectedTicket.id_proyeccion).fecha +`</td>` + 
+            `<td>`+getProyecbyId(selectedTicket.id_proyeccion).hora +`</td>` + 
+            `</tr>`
+
+            +`</tbody>
+        </table>
+        `;
+
+
+
+        const element = tableallTiquetesDefault2;
+        html2pdf().set({
           pagebreak: {mode: 'css' }
         });
+        html2pdf(element)
+
       }
       else{
-        console.log('false')
+        console.log('error ID')
       } 
     }
   );
@@ -107,7 +150,6 @@ function getMisTiquetes(){
           return;
         }
         allTiquetes = await response.json();
-        console.log("tiquetes:"+allTiquetes)
         renderTable()
         
     })();
@@ -123,6 +165,7 @@ function renderTable(){
 }
 
 function newRowTable(element){
+  console.log(JSON.stringify(element))
     let row = $('#tableTiquetes > tbody:last-child')
     .append('<tr class="table-secondary .d-sm-flex"'+'id='+'"'+ element.id+'"'+'>'+
         '<th scope="row">'+element.id+'</th>'+
@@ -135,6 +178,7 @@ function newRowTable(element){
     )
   $('#tableSalasbody').append(row)
 }
+
 
 
 function getProyecbyId(idproyec){
@@ -179,7 +223,11 @@ function render(){
 function clickSelect(){//selecciona el id del tiquete de la list
   $('#listTiquetesContainer').change(function(){ 
     idTiquete = $(this).text();
+    
     idTiquete =  $( "#listTiquetesContainer option:selected" ).text();
+    selectedTicket = allTiquetes.find(
+      (element) => element.id == idTiquete
+    )
     $('#tiqueteplaceholder').focus().val(idTiquete)
     $('#selected').text(idTiquete)
     

@@ -2,6 +2,7 @@ gridPeliculas = new Array()
 gridSalas = new Array()
 allProyecciones = new Array()//todas
 gridProyecciones = new Array()//de la pelicula seleccionada
+allTiquetes = new Array()
 
 
 var gridPeliculasDefault = `
@@ -37,6 +38,10 @@ function cleanModalTableProyec(){
             selectedMovie = 0
             cantidadSeats = 0
             ticketPrice = 0
+
+
+            localStorage.removeItem('selected_seats')
+
             $('#dropdownCarteleraContainer option').remove()
         }
     );
@@ -53,12 +58,10 @@ function clickComprarTiquetes(){
             for (let index = 0; index < allSeats.length; index++) {
                 const element = allSeats[index];
 
-                newTicket.id_proyeccion = selectedMovie.id;
+                newTicket.id_proyeccion = selectedProyec
                 newTicket.id_cliente = user.getID()
                 newTicket.asiento = element;
 
-                console.log(newTicket)
-                
 
                 let request = new Request(url + "api/tiquetescComprados",
                   {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -70,6 +73,9 @@ function clickComprarTiquetes(){
                     console.log('Bad response')
                     //falta modal para erorres o con bootstrap o un alert
                 }
+                generatePDF(newTicket)
+                getTicketsProyec(JSON.parse(localStorage.getItem('selected_proyec')))
+                
                 
             }
   
@@ -78,13 +84,76 @@ function clickComprarTiquetes(){
             console.log(JSON.parse(localStorage.getItem('selected_seats')))
             console.log('No se pueden comprar tiquetes')
         }
-  
         
       }
     )
-  }
+}
+
+function generatePDF(newTicket){
+    let ticketRow = `
+        <h4 class="mx-auto mt-2 col-md-12" style="user-select: auto;" >Tiquete comprado</h4>
+
+        <table class="table mx-auto mt-3 col-md-12 " id="tableTiquetes"  style="width: 500px;">
+          <thead>
+            <tr class="table-secondary mx-auto">
+              <th scope="col">Pelicula</th>
+              <th scope="col">Cliente ID</th>
+              <th scope="col">Asiento</th>
+              <th scope="col">Fecha</th>
+              <th scope="col"> Hora(24h) </th>
+
+            </tr>
+          </thead>
+            <tbody id="tableTiquetesBody">`+
+            `<tr class="table-secondary .d-sm-flex"`+`>`+
+            `<th scope="row">`+getNamePelibyId_(newTicket.id_proyeccion)+`</th>`+
+            `<td>`+newTicket.id_cliente+`</td>` +
+            `<td>`+newTicket.asiento +`</td>` +
+   
+            `<td>`+getProyecbyId_(newTicket.id_proyeccion).fecha +`</td>` + 
+            `<td>`+getProyecbyId_(newTicket.id_proyeccion).hora +`</td>` + 
+            `</tr>`
+
+            +`</tbody>
+        </table>
+        `;
+
+        const element = ticketRow;
+        html2pdf().set({
+          pagebreak: {mode: 'css' }
+        });
+        html2pdf(element)
+        alert('Tiquets comprados')
 
 
+}
+
+
+function getProyecbyId_(idproyec){
+    let proyeccion = allProyecciones.find(
+      element => element.id == idproyec
+    )
+    return (proyeccion)
+}
+
+
+function getNamePelibyId_(idproyeccion){ 
+    let proyecionFound = allProyecciones.find(
+        element => element.id == idproyeccion
+    )
+
+    for (let index = 0; index < gridPeliculas.length; index++) {
+
+        if(gridPeliculas[index].id == proyecionFound.pelicula_id){
+          return gridPeliculas[index].nombre
+        }
+        
+      }
+  
+}
+  
+
+  
 function getPeliculas(){ //from DB
     let request = new Request(url + "api/peliculas",
         { method: 'GET',headers :{} }
@@ -136,6 +205,26 @@ function getProyecciones(){
       allProyecciones = await response.json();
     })();
 }
+
+function getallTiquetes(){
+
+
+    let request = new Request(url + "api/tiquetescComprados/",
+      {method: 'GET', headers: { }}
+    );
+
+    (async ()=>{
+
+        const response = await fetch(request);
+        if (!response.ok) {
+
+          return;
+        }
+        allTiquetes = await response.json();
+        
+    })();
+}
+
 
 
 //guarda solo las peliculas que estan en cartelera
@@ -193,7 +282,6 @@ function newRowModalProyec(element){
 
         '</td>'+'</tr>'
     )
-    console.log('NEW ROW')
 
     
     
@@ -246,6 +334,8 @@ function newRowGrid(pelicula){
     })
     .click(
         function(){ 
+            $('#seatsContainer').html('');
+
             selectedMovie = pelicula
             selectedMoviePrice = pelicula.precio
             localStorage.setItem('selected_movie',JSON.stringify(selectedMovie))

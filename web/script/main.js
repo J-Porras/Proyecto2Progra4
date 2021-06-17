@@ -13,6 +13,7 @@ var selectedMovie
 var selectedMoviePrice = 0
 var ticketPrice = 0
 var selectedProyec
+var ticketsProyec = new Array()
 //id,nombre,contra,rol
 
 
@@ -34,7 +35,7 @@ const columnsSeatsCantidad = 8;
 
 if(current_title == 'Cinema24+1'){
 
-  populateUI();
+  //populateUI();
 
   ticketPrice = +movieSelect.value;
 
@@ -101,7 +102,11 @@ if(current_title == 'Cinema24+1'){
   $('#dropdownCarteleraContainer').change(function(){ 
     var value = $(this).text();
     value =  $( "#dropdownCarteleraContainer option:selected" ).text();
+    
     setselectedProyeccion(value)
+    getTicketsProyec(value)
+    generateSeats();
+
   });
   
 
@@ -112,7 +117,10 @@ if(current_title == 'Cinema24+1'){
 
 //generando los asientos visualmente y las columnas
 function generateSeats(){
+  $('#seatsContainer').html('');
+
   let singleSeat;
+  let idSeat;
 
 
   for (let rows = 0; rows < rowsSeatsCantidad; rows++) {
@@ -120,11 +128,20 @@ function generateSeats(){
     .addClass('row')
 
     for (let columns = 0, numAsiento = 1; columns < columnsSeatsCantidad; columns++,numAsiento++) {
-      singleSeat = $('<div/>',{
-        id: ((rows+10).toString(36)).toUpperCase() + numAsiento
-      })
-      .addClass('seat')
-
+      idSeat = ((rows+10).toString(36)).toUpperCase() + numAsiento
+      if(seatOccupied(idSeat)){
+        singleSeat = $('<div/>',{
+          id: idSeat
+        })
+        .addClass('seat occupied')
+      }
+      else{
+        singleSeat = $('<div/>',{
+          id: idSeat
+        })
+        .addClass('seat ')
+      }
+      
       rowSeats.append(singleSeat)
     }
 
@@ -132,6 +149,61 @@ function generateSeats(){
   }//fin for rows
 
 }
+
+
+function getTicketsProyec(id_proyec){
+  console.log('ticketsss')
+  let request = new Request(url + "api/tiquetescComprados/"+id_proyec,
+    {method: 'GET',headers :{'Content-Type': 'application/json'},}
+  );
+
+  (async ()=>{
+  const response =  await fetch(request);
+
+    if(!response.ok){
+      //falta modal para erorres o con bootstrap o un alert
+      return;
+    }
+    ticketsProyec =  await response.json();
+    generateSeats()
+
+  })();
+  
+
+}
+
+function seatOccupied(idSeat){
+  let isOccupied = false;
+  isOccupied = ticketsProyec.find(
+    (element) => element.asiento == idSeat
+  )
+  return isOccupied
+
+}
+
+
+
+function getTiquetes(){
+  let request = new Request(url + "api/tiquetescComprados/",
+      {method: 'GET', headers: { }}
+    );
+
+    (async ()=>{
+
+        const response = await fetch(request);
+        if (!response.ok) {
+
+          return;
+        }
+        allTiquetes = await response.json();
+        console.log("tiquetes:"+allTiquetes)
+        //renderTable()
+        
+    })();
+}
+
+
+
 
 function setSelectedMovie(themovie){
   selectedMovie = themovie
