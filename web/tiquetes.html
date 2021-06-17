@@ -11,6 +11,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <link rel='stylesheet' type='text/css' href='css/estilo.css'>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        
+        
     </head>
     <body>
         <div id="tiquetesContainer">
@@ -18,38 +21,34 @@
         </div>
 
 
-
         <div id="listTiquetesContainer" class=" mx-auto mt-3 col-md-12 " style="width:500px;">
             <h4 class="mx-auto mt-2 col-md-12" style="user-select: auto;">Tiquete seleccionado</h4>
+            <h4 class="mx-auto mt-2 col-md-12" id="selected" style="user-select: auto;">...</h4>
 
-            <input class="form-control" id="tiqueteplaceholder" type="text" placeholder="Tiquete..." aria-label="readonly input example" readonly>
 
             <h4 class="mx-auto mt-2 col-md-12" style="user-select: auto;">Seleccione un tiquete para generar PDF</h4>
                 <!--JS-->
         </div>
 
         <div class="mx-auto mt-3 col-md-12" style="width: 500px;">
-            <button type="submit" class="btn btn-primary mx-auto mt-3 col-md-12" id="downloadPDF">Descargar como PDF</button>
+            <button type="submit" class="btn btn-primary mx-auto mt-3 col-md-12" id="downloadPDF" >Descargar como PDF
+        </button>
 
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        <div id="content">
+            <!-- el contenido HTML va aqui -->
+        </div>
+        
+        <div id="elementH"></div>
+        
 
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script  src="script/html2pdf.bundle.min.js"></script>>
+
         <!--Nuestros scripts-->
         <script src='script/currentUser.js'></script>
 

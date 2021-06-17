@@ -1,6 +1,9 @@
+
+
 let allTiquetes = new Array()
 let allPeliculas = new Array()
 let allProyecciones = new Array()
+let idTiquete
 
 let tableallTiquetesDefault = `
 <table class="table mx-auto mt-3 col-md-12 " id="tableTiquetes"  style="width: 500px;">
@@ -63,7 +66,30 @@ function getProyecciones(){
   })(); 
 }
 
+function clickGeneratePDF(){
+  $('#downloadPDF').click(
+    function(){ 
+      console.log('asdasdadasd')
+      if(checkID()){
+        console.log('true')
+        const element = document.getElementById(idTiquete);
+        html2pdf(element).set({
+          pagebreak: {mode: 'css' }
+        });
+      }
+      else{
+        console.log('false')
+      } 
+    }
+  );
+}
 
+function checkID(){
+  if(idTiquete > '0' && idTiquete < allTiquetes.length){
+    return true;
+  }
+  return false;
+}
 
 
 function getMisTiquetes(){
@@ -98,13 +124,13 @@ function renderTable(){
 
 function newRowTable(element){
     let row = $('#tableTiquetes > tbody:last-child')
-    .append('<tr class="table-secondary .d-sm-flex">'+
+    .append('<tr class="table-secondary .d-sm-flex"'+'id='+'"'+ element.id+'"'+'>'+
         '<th scope="row">'+element.id+'</th>'+
-        '<td >'+getNamePelibyId(element.id_proyeccion)+'</td>' +
-        '<td >'+element.id_cliente +'</td>' +
-        '<td >'+element.asiento +'</td>' + 
-        '<td >'+getProyecbyId(element.id_proyeccion).fecha +'</td>' + 
-        '<td >'+getProyecbyId(element.id_proyeccion).hora +'</td>' + 
+        '<td>'+getNamePelibyId(element.id_proyeccion)+'</td>' +
+        '<td>'+element.id_cliente +'</td>' +
+        '<td>'+element.asiento +'</td>' + 
+        '<td>'+getProyecbyId(element.id_proyeccion).fecha +'</td>' + 
+        '<td>'+getProyecbyId(element.id_proyeccion).hora +'</td>' + 
         '</tr>'
     )
   $('#tableSalasbody').append(row)
@@ -134,7 +160,6 @@ function getNamePelibyId(idproyec){
 }
 
 function newRowList(tiquete){
-  console.log('IM IN')
     let option = $('<option>',{
       text: tiquete.id,
       id: tiquete.id,
@@ -153,9 +178,10 @@ function render(){
 
 function clickSelect(){//selecciona el id del tiquete de la list
   $('#listTiquetesContainer').change(function(){ 
-    let idTiquete = $(this).text();
+    idTiquete = $(this).text();
     idTiquete =  $( "#listTiquetesContainer option:selected" ).text();
     $('#tiqueteplaceholder').focus().val(idTiquete)
+    $('#selected').text(idTiquete)
     
   });
 }
@@ -167,6 +193,7 @@ function whenloaded(){
   clickSelect()
   render()
   getProyecciones()
+  clickGeneratePDF()
 }
 
 $(whenloaded)
