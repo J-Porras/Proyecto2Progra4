@@ -1,13 +1,13 @@
-var misTiquetes = new Array()
+let allTiquetes = new Array()
 let allPeliculas = new Array()
 let allProyecciones = new Array()
 
-var tableTiquetesDefault = `
+let tableallTiquetesDefault = `
 <table class="table mx-auto mt-3 col-md-12 " id="tableTiquetes"  style="width: 500px;">
   <thead>
     <tr class="table-secondary mx-auto">
       <th scope="col">ID</th>
-      <th scope="col">Numero de Proyeccion</th>
+      <th scope="col">Pelicula</th>
       <th scope="col">Cliente</th>
       <th scope="col">Asiento</th>
       <th scope="col">Fecha</th>
@@ -19,6 +19,11 @@ var tableTiquetesDefault = `
   </tbody>
 </table>
 `;
+
+let selectTiquetes=`
+  <select id="selectTiquetes">
+  </select>
+`
 
 
 function getPeliculas(){ //from DB
@@ -34,7 +39,7 @@ function getPeliculas(){ //from DB
         return;
       }
       allPeliculas = await response.json();
-      
+      getMisTiquetes();
   })();
 }
 
@@ -54,7 +59,7 @@ function getProyecciones(){
       allProyecciones = await response.json();
       console.log(allProyecciones)
       getPeliculas()
-      getMisTiquetes();
+     
   })(); 
 }
 
@@ -63,9 +68,8 @@ function getProyecciones(){
 
 function getMisTiquetes(){
 
-    let id_actual = JSON.parse(localStorage.getItem('usuario_actual')).id
 
-    let request = new Request(url + "api/tiquetes/"+id_actual,
+    let request = new Request(url + "api/tiquetescComprados/",
       {method: 'GET', headers: { }}
     );
 
@@ -76,23 +80,23 @@ function getMisTiquetes(){
 
           return;
         }
-        misTiquetes = await response.json();
-        console.log("tiquetes:"+misTiquetes)
+        allTiquetes = await response.json();
+        console.log("tiquetes:"+allTiquetes)
         renderTable()
         
     })();
 }
 
 function renderTable(){
-    misTiquetes.forEach(
+  allTiquetes.forEach(
         (index) =>{
           newRowTable(index);
+          newRowList(index);
         }
     );
 }
 
 function newRowTable(element){
-  console.log("ELemento:"+element)
     let row = $('#tableTiquetes > tbody:last-child')
     .append('<tr class="table-secondary .d-sm-flex">'+
         '<th scope="row">'+element.id+'</th>'+
@@ -129,12 +133,38 @@ function getNamePelibyId(idproyec){
 
 }
 
+function newRowList(tiquete){
+  console.log('IM IN')
+    let option = $('<option>',{
+      text: tiquete.id,
+      id: tiquete.id,
+      
+      
+  })
+  $('#selectTiquetes').append(option)
+}
+
 function render(){
-  $('#tableTiquetesContainer').append(tableTiquetesDefault)
+  $('#tiquetesContainer').append(tableallTiquetesDefault)
+  $('#listTiquetesContainer').append(selectTiquetes)
+
 }
 
 
+function clickSelect(){//selecciona el id del tiquete de la list
+  $('#listTiquetesContainer').change(function(){ 
+    let idTiquete = $(this).text();
+    idTiquete =  $( "#listTiquetesContainer option:selected" ).text();
+    $('#tiqueteplaceholder').focus().val(idTiquete)
+    
+  });
+}
+
+
+
+
 function whenloaded(){
+  clickSelect()
   render()
   getProyecciones()
 }

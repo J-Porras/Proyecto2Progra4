@@ -297,6 +297,7 @@ function clickNuevaProyec(){
 
 }
 
+//mis tiquetes
 function clickTiquetes(){
   
   $('#MispeliculasBtn').click(
@@ -306,6 +307,19 @@ function clickTiquetes(){
   );
 
 }
+//todos los tiquetes
+function clickAllTiquetes(){
+  
+  $('#alltiquetesBtn').click(
+    function(){
+
+      document.location = url + "tiquetes.html";
+    }
+  );
+
+}
+
+
 
 //iniciar sesion
 function login(){
@@ -386,6 +400,7 @@ function whenloaded(){
   clickNuevaProyec();
   clickTiquetes();
   clickProyecModal();
+  clickAllTiquetes();
   isAdmin();
 
 

@@ -253,7 +253,7 @@ function newRowGrid(pelicula){
             renderModalProyec(pelicula.id)
         }
     )
-    .addClass("btn btn-primary" )
+    .addClass("btn btn-primary w-70 p-1" )
     .attr('data-bs-toggle','modal')
     .attr('data-bs-target','#modalProyecPeliculas')
     .click()

@@ -38,7 +38,7 @@ function changeNavBar(){
 
     })
     .click(clickLogout)
-    .addClass('btn btn-primary mr-1')
+    .addClass('btn btn-primary me-1')
     .attr('type', 'text');
     
     $('#navbarNavAltMarkup').append(logoutBtn);
@@ -60,36 +60,47 @@ function changeNavBar(){
 
     switch (rol_actual) {
         case 0:// admin //
-            var salasBtn = $('<button/>',{
+            let salasBtn = $('<button/>',{
                 text : 'Registrar Salas',
                 id : 'registrarSalasBtn',
         
             })
-            .addClass('btn btn-primary .mx-auto')
+            .addClass('btn btn-primary .mx-auto me-1')
             .attr('type', 'text');
             
             $('#navbarNavAltMarkup').append(salasBtn);
 
-            var peliculasBtn = $('<button/>',{
+            let peliculasBtn = $('<button/>',{
                 text : 'Agregar Peliculas',
                 id : 'peliculasBtn',
         
             })
-            .addClass('btn btn-primary .mx-auto')
+            .addClass('btn btn-primary .mx-auto me-1')
             .attr('type', 'text');
             
             $('#navbarNavAltMarkup').append(peliculasBtn);
 
-            var proyecionBtn = $('<button/>',{
+            let proyecionBtn = $('<button/>',{
                 text : 'Nueva Proyeccion',
                 id : 'proyecionBtn',
         
             })
-            .addClass('btn btn-primary .mx-auto')
+            .addClass('btn btn-primary .mx-auto me-1')
 
             .attr('type', 'text');
             
             $('#navbarNavAltMarkup').append(proyecionBtn);
+
+            let tiquetesBtn = $('<button/>',{
+              text : 'Ver Tiquetes Comprados',
+              id : 'alltiquetesBtn',
+      
+            })
+            .addClass('btn btn-primary .mx-auto me-1')
+
+            .attr('type', 'text');
+            
+            $('#navbarNavAltMarkup').append(tiquetesBtn);
 
             
         break;
@@ -100,7 +111,7 @@ function changeNavBar(){
                 id : 'MispeliculasBtn',
         
             })
-            .addClass('btn btn-primary .mx-auto')
+            .addClass('btn btn-primary .mx-auto me-1')
             .attr('type', 'text');
             
             $('#navbarNavAltMarkup').append(MispeliculasBtn);
@@ -130,7 +141,7 @@ function changeNavBar(){
       id : 'toggleRegister',
     })
     
-    .addClass('btn btn-primary .mx-auto')
+    .addClass('btn btn-primary .mx-auto me-1')
     .attr('type', 'text');
     $('#navbarNavAltMarkup').append(registerBtn);
 
