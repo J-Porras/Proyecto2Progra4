@@ -4,7 +4,8 @@ allProyecciones = new Array()//todas
 gridProyecciones = new Array()//de la pelicula seleccionada
 allTiquetes = new Array()
 peliculasCartelera = new Array()
-
+var filterOn;
+var filterMovies_ = new Array()
 
 var gridPeliculasDefault = `
 <div class="container" id="gridPeliculas">
@@ -373,9 +374,19 @@ function newRowModalProyec(element){
 /////////////RENDERS
 
 //renderiza las peliculas en Index
-function renderGridPeliculas(idmovie){
+function renderGridPeliculas(){
     
     peliculasCartelera.forEach(
+        (pelicula) =>{
+            newRowGrid(pelicula)
+        }
+    );
+
+}
+
+function renderGridPeliculasFilter(){
+    filterMovies_ = JSON.parse(localStorage.getItem('filterMovies'))
+    filterMovies_.forEach(
         (pelicula) =>{
             newRowGrid(pelicula)
         }
@@ -443,6 +454,32 @@ function newRowGrid(pelicula){
     $('#gridPeliculasContainer').append(row)
 }
 
+function clickFIlterMovies(){
+    $('#searchPeliIndex').click(
+      function(){
+        namePart = $('#nomPeliString').val()  
+        for (let index = 0; index < gridPeliculas.length; index++) {
+            const element = gridPeliculas[index];
+
+
+
+            if(((element.nombre).toUpperCase()).includes(namePart.toUpperCase())){
+                if(element.cartelera){
+                    filterMovies_.push(element)
+                }
+                
+            }
+        }
+        peliculasCartelera = filterMovies_
+        console.log(JSON.stringify(peliculasCartelera))
+        localStorage.setItem('filter',JSON.stringify(true))
+        localStorage.setItem('filterMovies',JSON.stringify(filterMovies_))
+        
+
+      }
+    );
+
+}
 
 function renderDropdownCartelera(){
     let optionempty = $('<option>',{
@@ -493,6 +530,7 @@ function whenloaded(){
     cleanModalTableProyec();
     clickComprarTiquetes();
     clickComprarAnon();
+    clickFIlterMovies();
     renderAll();
     getPeliculas();
     getSalas();
@@ -500,5 +538,30 @@ function whenloaded(){
     
 }
 
+function loadFilter(){
+    console.log('adasdas')
+    renderAll();
+    cleanModalTableProyec();
+    clickComprarTiquetes();
+    clickComprarAnon();
+    clickFIlterMovies();
+    renderGridPeliculasFilter();
+}
 
-$(whenloaded)
+if(JSON.parse(localStorage.getItem('filter'))){
+    console.log('ON')
+
+    
+    localStorage.setItem('filter',JSON.stringify(false))
+    $(loadFilter)
+}
+else{
+    console.log('OFF')
+
+    $(whenloaded)
+    localStorage.setItem('filter',JSON.stringify(false))
+
+}
+
+
+

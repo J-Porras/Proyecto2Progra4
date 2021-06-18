@@ -406,6 +406,8 @@ function clickAllTiquetes(){
 
 
 
+
+
 //iniciar sesion
 function login(){
 
