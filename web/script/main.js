@@ -2,6 +2,7 @@ url = "http://localhost:8080/Proyecto2Progra4/";
 
 
 var current_title = $(document).attr('title');
+let badresponse = false;
 
 var current_user = {contrasenna:"-",id:"-",nombre:"-",rol:"-1"};
 
@@ -33,6 +34,8 @@ const columnsSeatsCantidad = 8;
 
 
 if(current_title == 'Cinema24+1'){
+
+  $('#alertlogin').toggle()
   if(user.isAnonUser()){
     console.log('if')
     $('#buyBtnAnonimo').show()
@@ -254,7 +257,9 @@ function openForm() {
   $('#toggleLogin').click(
     
     function(){
+      $('#alertlogin').hide();
       $('#FormLogin').show();
+      
     }
 
   );
@@ -408,6 +413,10 @@ function login(){
   current_user.id =  $('#idlogin').val();
   current_user.contrasenna = $('#contrasena').val();
 
+  if(!current_user.id || !current_user.contrasenna){
+
+    return 
+  }
 
   let request = new Request(url + "api/usuarios/login",
     {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -423,7 +432,9 @@ function login(){
     const response =  await fetch(request);
 
     if(!response.ok){
-      alert('Bad response')
+      
+
+      
       //falta modal para erorres o con bootstrap o un alert
       return;
     }
@@ -432,6 +443,8 @@ function login(){
 
     localStorage.setItem('usuario_actual', JSON.stringify(current_user));
     user.setUser();
+    $('#alertlogin').hide();
+
 
     location.reload()
 
@@ -448,6 +461,11 @@ function register(){
   new_user.nombre = $('#nombreregister').val();
   new_user.id = $('#idregister').val();
   new_user.contrasenna = $('#contrasenaregister').val();
+
+
+  if(!new_user.id || !new_user.nombre || !new_user.contrasenna){
+    return 
+  }
 
   let request = new Request(url + 'api/usuarios',
   {method: 'POST',headers :{'Content-Type': 'application/json'},
@@ -473,6 +491,7 @@ function register(){
 
 }
 
+
 function whenloaded(){
   
   clickLogin();
@@ -484,7 +503,6 @@ function whenloaded(){
   clickProyecModal();
   clickAllTiquetes();
   isAdmin();
-
 
   openForm();
   closeForm();

@@ -96,41 +96,77 @@ function clickComprarAnon(){
     $('#buyBtnModal2').click(
         function(){
             if(user.isAnonUser()){
-                let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
-                let newTicket = {asiento:"",id:"-1",id_cliente:"",id_proyeccion:"-1"}
+                
 
-                for (let index = 0; index < allSeats.length; index++) {
-                    const element = allSeats[index];
-    
-                    newTicket.id_proyeccion = selectedProyec
-                    newTicket.id_cliente = $('#idAnon').val()
-                    newTicket.asiento = element;
-    
-    
-                    let request = new Request(url + "api/tiquetescComprados",
-                      {method: 'POST',headers :{'Content-Type': 'application/json'},
-                        body: JSON.stringify(newTicket)}
-                    );
-    
-                    const response = fetch(request);
+                let new_user_anon = {contrasenna:"-",id:"-",nombre:"-",rol:"-1"};
+                new_user_anon.contrasenna = '1234'
+                new_user_anon.id =  $('#idAnon').val()
+                new_user_anon.nombre = $('#nombreAnon').val()
+                new_user_anon.rol = "1"
+
+                console.log('new User'+new_user_anon)
+                
+
+
+                let request = new Request(url + 'api/usuarios',
+                {method: 'POST',headers :{'Content-Type': 'application/json'},
+                body: JSON.stringify(new_user_anon)}
+                );
+
+                (async () =>{
+
+
+                    const response = await fetch(request);
+
                     if(!response.ok){
-                        console.log('Bad response')
-                        //falta modal para erorres o con bootstrap o un alert
+                        console.log('error Register')
+                    //falta modal para erorres o con bootstrap o un alert
+                    return;
                     }
-                    generatePDF(newTicket)
-                    getTicketsProyec(JSON.parse(localStorage.getItem('selected_proyec')))
-                    
-                    
-                }
+                    sendTicketAnon();
 
-            }//else error compra de tiquetes
-            
+
+                    //los valores del objeto de JS debe estar en el mismo orden que en la clase de Java sino muere
+                })();
+
+                
+
+            }//else error compra de tiquetes     
 
         }
     )
 }
 
-function generatePDF(newTicket){
+function sendTicketAnon(){
+    
+        let allSeats = JSON.parse(localStorage.getItem('selected_seats'))
+        let newTicketAnon = {asiento:"",id:"-1",id_cliente:"",id_proyeccion:"-1"}
+
+        for (let index = 0; index < allSeats.length; index++) {
+            const element = allSeats[index];
+
+            newTicketAnon.id_proyeccion = selectedProyec
+            newTicketAnon.id_cliente = $('#idAnon').val()
+            newTicketAnon.asiento = element;
+
+
+            let request = new Request(url + "api/tiquetescComprados",
+                {method: 'POST',headers :{'Content-Type': 'application/json'},
+                 body: JSON.stringify(newTicketAnon)}
+            );
+
+                const response = fetch(request);
+            if(!response.ok){
+                console.log('Bad response')
+                //falta modal para erorres o con bootstrap o un x
+            }
+            generatePDF(newTicketAnon)
+            getTicketsProyec(JSON.parse(localStorage.getItem('selected_proyec')))
+                
+        }
+}
+
+function generatePDF(ticket){
     let ticketRow = `
         <h4 class="mx-auto mt-2 col-md-12" style="user-select: auto;" >Tiquete comprado</h4>
 
@@ -142,30 +178,28 @@ function generatePDF(newTicket){
               <th scope="col">Asiento</th>
               <th scope="col">Fecha</th>
               <th scope="col"> Hora(24h) </th>
-
             </tr>
           </thead>
             <tbody id="tableTiquetesBody">`+
             `<tr class="table-secondary .d-sm-flex"`+`>`+
-            `<th scope="row">`+getNamePelibyId_(newTicket.id_proyeccion)+`</th>`+
-            `<td>`+newTicket.id_cliente+`</td>` +
-            `<td>`+newTicket.asiento +`</td>` +
+            `<th scope="row">`+getNamePelibyId_(ticket.id_proyeccion)+`</th>`+
+            `<td>`+ticket.id_cliente+`</td>` +
+            `<td>`+ticket.asiento +`</td>` +
    
-            `<td>`+getProyecbyId_(newTicket.id_proyeccion).fecha +`</td>` + 
-            `<td>`+getProyecbyId_(newTicket.id_proyeccion).hora +`</td>` + 
+            `<td>`+getProyecbyId_(ticket.id_proyeccion).fecha +`</td>` + 
+            `<td>`+getProyecbyId_(ticket.id_proyeccion).hora +`</td>` + 
             `</tr>`
 
             +`</tbody>
         </table>
-        `;
+    `;
 
-        const element = ticketRow;
+    const element = ticketRow;
         html2pdf().set({
           pagebreak: {mode: 'css' }
         });
         html2pdf(element)
-        alert('Tiquets comprados')
-
+        alert('Tiquets comprado')
 
 }
 
@@ -380,10 +414,13 @@ function newRowGrid(pelicula){
     })
     .click(
         function(){ 
+            $('#modalProyecPeliculas tbody tr').remove()
+            $('#dropdownCarteleraContainer option').remove()
             $('#seatsContainer').html('');
 
             selectedMovie = pelicula
             selectedMoviePrice = pelicula.precio
+            
             localStorage.setItem('selected_movie',JSON.stringify(selectedMovie))
             localStorage.setItem('selectedMoviePrice',JSON.stringify(selectedMoviePrice))
             renderModalProyec(pelicula.id)

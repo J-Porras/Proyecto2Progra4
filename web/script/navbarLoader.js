@@ -109,13 +109,13 @@ function changeNavBar(){
             
             let nomUser = $('<button/>',{
               text : 'Usuario: '+JSON.parse(localStorage.getItem('usuario_actual')).nombre,
-              id : 'alltiquetesBtn',
+              id : 'nomUser',
       
             })
             .addClass('btn btn-primary me-1 flex-row-reverse ms-auto')
-
             .attr('type', 'text');
             $('#navbarNavAltMarkup').append(nomUser);
+
             
         break;
 
@@ -132,7 +132,7 @@ function changeNavBar(){
 
             let nomUserCliente = $('<button/>',{
               text : 'Usuario: '+JSON.parse(localStorage.getItem('usuario_actual')).nombre,
-              id : 'alltiquetesBtn',
+              id : 'nomUserCliente',
       
             })
             .addClass('btn btn-primary me-1 flex-row-reverse ms-auto')

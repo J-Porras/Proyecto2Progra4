@@ -65,10 +65,10 @@ function newPelicula(){
 
     nuevaPelicula.nombre = $('#nuevapelinombre').val()
     nuevaPelicula.precio = $('#nuevapeliprecio').val()
-    if ($('#estaCartelera').is(":checked"))
+    /*if ($('#estaCartelera').is(":checked"))
     {
         nuevaPelicula.cartelera = "1"
-    }
+    }*/
 
 
    

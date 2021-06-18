@@ -25,10 +25,14 @@
         <!--Form de iniciar sesion POP-UP-->
         <div class="form-popup" id="FormLogin" >
             <form action="" class="form-container">
+                <div class="alert alert-warning" role="alert" id="alertlogin">
+                    Usuario o contraseña incorrecta
+                  </div>
+
                 <img class="" src="images/x.jpg" alt="Cerrar" id="closeFormLogin">
                 <h1>Login</h1>
-                <input type="text" id = "idlogin" placeholder="ID" name="-" required>
-                <input type="password" id="contrasena" placeholder="Contraseña" name="-" required autocomplete="off">
+                <input type="text" placeholder="ID" id = "idlogin" name="-" required>
+                <input type="password" id="contrasena" placeholder="Contraseña"  name="-" required autocomplete="off">
                 <button type="submit" class="btn" id="btnLogin">Login</button>
             </form>
         </div>

@@ -53,6 +53,7 @@ public class usuariosDAO {
         stm.setString(2, cl.getNombre());
         stm.setString(3, cl.getContrasenna());
         stm.setInt(4, cl.getRol());
+        System.out.println(stm);
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("Usuario ya existe");
